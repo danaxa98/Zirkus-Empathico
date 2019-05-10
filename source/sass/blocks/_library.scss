@@ -1,0 +1,213 @@
+.b-library {
+  @extend %base-page;
+
+  @include grunticon('help_trailer');
+  background-size: 100% 100%;
+
+  &.slider {
+    @include grunticon('help_stage_sliders');
+    background-size: 100% 100%;
+  }
+
+  .card {
+    width: 122px;
+    height: 144px;
+
+    position: absolute;
+
+    background-size: 100% 100%;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @for $i from 1 through 7 {
+    .card-#{$i} {
+      @include grunticon('help_card_#{$i}');
+    }
+  };
+
+  .card-1 {
+    left: 5%;
+    top: 39%;
+  }
+  .card-2 {
+    left: 18%;
+    top: 28%;
+  }
+  .card-3 {
+    left: 32%;
+    top: 32%;
+  }
+  .card-4 {
+    left: 45%;
+    top: 22%;
+  }
+  .card-5 {
+    left: 59%;
+    top: 32%;
+  }
+  .card-6 {
+    left: 72%;
+    top: 28%;
+  }
+  .card-7 {
+    right: 5%;
+    top: 39%;
+  }
+
+  .close-button {
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    @include grunticon('help_btn_close');
+
+    position: absolute;
+    right: 5.5%;
+    top: 9%;
+
+    span {
+      @extend %hide-text;
+    }
+  }
+  &.slider .close-button {
+    @include grunticon('help_sliders_btn_close');
+
+    right: 15px;
+    top: 15px;
+  }
+
+  .home {
+    width: 74px;
+    height: 74px;
+    background-size: 100% 100%;
+    @include grunticon('help_btn_home');
+
+    position: absolute;
+    left: 15px;
+    top: 15px;
+
+    span {
+      @extend %hide-text;
+    }
+  }
+
+  .modal-view {
+    @include grunticon('help_card_big');
+    background-size: 100% 100%;
+
+    width: 90%;
+    height: 85%;
+
+    position: absolute;
+    left: 5%;
+    top: 7.5%;
+
+    div {
+      background-size: 100% 100%;
+      position: absolute;
+    }
+
+    .emotion-icon {
+      width: 10.3%;
+      height: 21.2%;
+
+      top: 13%;
+      left: 5.8%;
+    }
+    .emotion-mouth {
+      width: 27.7%;
+      height: 21%;
+
+      top: 13%;
+      left: 45.8%;
+    }
+    .emotion-eyes {
+      width: 27.7%;
+      height: 21%;
+
+      top: 13%;
+      left: 17.4%;
+    }
+    .emotion-manikin {
+      width: 20%;
+      height: 73.4%;
+
+      top: 13%;
+      right: 5.4%;
+
+      z-index: 200;
+    }
+    .emotion-context {
+      width: 40.6%;
+      height: 50.2%;
+
+      bottom: 13.7%;
+      left: 32.9%;
+      div {
+        width: 97.8%;
+        height: 96%;
+        position: absolute;
+        left: 1%;
+        top: 2%;
+        border-radius: 4px;
+      }
+    }
+    .emotion-face {
+      width: 26.9%;
+      height: 50.2%;
+
+      bottom: 13.7%;
+      left: 5.3%;
+      div {
+        width: 85%;
+        height: 85%;
+
+        top: 8%;
+        left: 9%;
+
+        border-radius: 50%;
+      }
+    }
+
+    .emotion-face:after,
+    .emotion-context:after {
+      position: absolute;
+      bottom: 3%;
+      right: 3%;
+
+      width: 48px;
+      height: 48px;
+
+      background-size: 100% 100%;
+      @include grunticon('help_btn_next_img');
+      content: " ";
+    }
+
+    .emotion-manikin:after {
+      position: absolute;
+      bottom: 3%;
+      right: 40%;
+
+      width: 48px;
+      height: 48px;
+
+      @include grunticon('help_btn_play');
+      content: " ";
+
+      z-index: 100;
+    }
+  }
+  &.emotion-card .manikin-self {
+    left: 73.3%;
+    bottom: 25.5%;
+  }
+
+  .fox-animation {
+    left:  232px;
+    top: 432px;
+  }
+}

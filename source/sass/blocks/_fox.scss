@@ -1,0 +1,77 @@
+/*
+// JavaScript Code to generate CSS file
+var test = data/Animations.js
+var s = "content: ";
+for(i=0; i < test.length; i++) {
+  s += "url('../" + test[i].file + "') ";
+}
+s
+for(i=0; i < test.length; i++) {
+  s += "."+ test[i].name + " {\n "+
+    "\tbackground-image: url('../" + test[i].file + "');\n" +
+    "\twidth: "+test[i].size[0]+"px;\n" +
+    "\theight: "+test[i].size[1]+"px;\n"+
+    "}\n";
+}
+
+*/
+
+.fox-animation {
+  position: absolute;
+  z-index: 100;
+}
+
+.fox-stairs {
+  background-image: url('../media/sprits/fox/stairs_map.png');
+}
+.fox-attention {
+  background-image: url('../media/sprits/fox/attention_map.png');
+}
+.fox-bow {
+  background-image: url('../media/sprits/fox/bow_map.png');
+}
+.fox-clap {
+  background-image: url('../media/sprits/fox/clap_map.png');
+}
+.fox-go-on {
+  background-image: url('../media/sprits/fox/go_on_map.png');
+}
+.fox-hop {
+  background-image: url('../media/sprits/fox/hop_map.png');
+}
+.fox-laying-1 {
+  background-image: url('../media/sprits/fox/lying1_map.png');
+}
+.fox-laying-2 {
+  background-image: url('../media/sprits/fox/lying2_map.png');
+}
+.fox-laying-3 {
+  background-image: url('../media/sprits/fox/lying3_map.png');
+}
+.fox-pointing-eyes {
+  background-image: url('../media/sprits/fox/pointing_eyes_map.png');
+}
+.fox-pointing-mouth {
+  background-image: url('../media/sprits/fox/pointing_mouth_map.png');
+}
+.fox-pondering {
+  background-image: url('../media/sprits/fox/pondering_map.png');
+}
+.fox-hedgehog {
+  background-image: url('../media/sprits/fox/present_hedgehog_map.png');
+}
+.fox-owl {
+  background-image: url('../media/sprits/fox/present_owl_map.png');
+}
+.fox-pig {
+  background-image: url('../media/sprits/fox/present_pig_map.png');
+}
+.fox-toad {
+  background-image: url('../media/sprits/fox/present_toad_map.png');
+}
+.fox-wolf {
+  background-image: url('../media/sprits/fox/present_wolf_map.png');
+}
+.fox-pointing {
+  background-image: url('../media/sprits/fox/presenting_map.png');
+}

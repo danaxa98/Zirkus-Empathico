@@ -1,0 +1,11 @@
+.b-settings {
+  @extend %base-page;
+
+  color: #fff;
+
+  button {
+    background-color: #CCCCCC;
+    padding: 5px;
+  }
+
+}

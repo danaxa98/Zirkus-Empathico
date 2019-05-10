@@ -1,0 +1,230 @@
+.b-choose-level-page {
+  @extend %base-page;
+
+  $defaultColorIsTaskProgress: #334F72 #811200 #788126 #BF9930;
+
+  @for $miniGameId from 1 through 4 {
+    &.mini-game-#{$miniGameId} {
+      @include grunticon('minigame#{$miniGameId}_bg_level');
+    }
+
+    @for $i from 0 through 10 {
+      &.mini-game-#{$miniGameId} .is-level-progress-#{$i} {
+        @include grunticon('minigame#{$miniGameId}_cake_large_#{$i}');
+      }
+    }
+
+    @for $i from 0 through 10 {
+      &.mini-game-#{$miniGameId} .is-task-progress-#{$i} {
+        @include grunticon('minigame#{$miniGameId}_cake_small_#{$i}');
+      }
+    }
+    &.mini-game-#{$miniGameId} .is-level-chooser-active {
+      border: 5px solid nth($defaultColorIsTaskProgress, $miniGameId);;
+    }
+
+    &.mini-game-#{$miniGameId} .level-next {
+      @include grunticon('minigame#{$miniGameId}_btn_start_large');
+      &:hover, &:active {
+        @include grunticon('minigame#{$miniGameId}_btn_start_large_active');
+      }
+    }
+
+    &.mini-game-#{$miniGameId} .level-home {
+      @include grunticon('minigame#{$miniGameId}_btn_home');
+      &:hover {
+        @include grunticon('minigame#{$miniGameId}_btn_home_active');
+      }
+    }
+  }
+
+  background-size: 100% 100%;
+
+  .level-chooser {
+    position: absolute;
+
+    width: 5%;
+    height: 9%;
+
+    text-indent: -9999px;
+
+    border-radius: 50%;
+    background-size: 100% 100%;
+    a, div {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .is-level-chooser-active {
+    width: 66px;
+    height: 66px;
+
+    animation-name:             pulsing-border;
+    animation-duration:         1s;
+    animation-iteration-count:  20;
+    animation-timing-function: linear;
+  }
+
+
+  .level-progress {
+    top: 10%;
+    left: 8%;
+    width: 20%;
+    height: 35%;
+
+    position: absolute;
+    text-indent: -9999px;
+    div {
+      width: 100%;
+      height: 100%;
+      background-size: 100% 100%;
+      position: absolute;
+    }
+
+/*
+    animation-name:             level-progress;
+    animation-duration:         2.5s;
+    animation-iteration-count:  1;
+    animation-timing-function: ease-out;
+    transition: background 1.5s linear;
+    */
+  }
+
+
+
+  .level-present {
+    position: absolute;
+    background-size: 100% 100%;
+    z-index: 500;
+  }
+
+  $presentList: "wolf" "toad" "pig" "hedgehog" "owl";
+
+  @each $present in $presentList {
+    .level-present-#{$present}{
+      @include grunticon('present-#{$present}');
+    }
+  }
+
+  .level-next {
+    position: absolute;
+    background-size: 100% 100%;
+
+    width: 15%;
+    height: 27%;
+    left: 1000px;
+    top: 424px;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .level-home {
+    position: absolute;
+    background-size: 100% 100%;
+
+    width: 5%;
+    height: 9%;
+    top: 2%;
+    left: 1%;
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  /*
+  .level-fox {
+    position: absolute;
+    background-size: 100% 100%;
+    background-position: bottom;
+
+    width: 119px;
+    height: 150px;
+
+    @include grunticon('fox_standing');
+  }
+  */
+
+  .appear {
+    animation-name:             appear;
+    animation-duration:         1s;
+    animation-iteration-count:  1;
+    animation-timing-function: ease-out;
+  }
+  .disappear {
+    animation-name:             disappear;
+    animation-duration:         1s;
+    animation-iteration-count:  1;
+    animation-timing-function: ease-in;
+  }
+
+  .level-won-award {
+    position: absolute;
+    background-size: 100% 100%;
+    background-position: center;
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1000;
+
+    @include grunticon('spiral');
+
+    animation-name:             rotate-spiral;
+    animation-duration:         1.5s;
+    animation-iteration-count:  1;
+    animation-timing-function: linear;
+    border-radius: 50%;
+  }
+
+}
+
+
+
+@keyframes rotate-spiral {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(720deg) scale(0);
+  }
+}
+@keyframes pulsing-border {
+  /* FIXME: level chooser */
+}
+
+@keyframes level-progress {
+  from {
+    transform: rotate(0deg) scale(0);
+  }
+  99% {
+    transform: rotate(360deg) scale(1);
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,149 @@
+.b-start-page {
+  @extend %base-page;
+
+  @include grunticon('select-minigame');
+  background-size: 100% 100%;
+
+  @for $miniGameId from 1 through 5 {
+    .mini-game-#{$miniGameId}-chooser.closed{
+      @include grunticon('menu-window-minigame#{$miniGameId}-complete');
+    }
+    .mini-game-#{$miniGameId}-chooser.open{
+      @include grunticon('menu-window-minigame#{$miniGameId}-open-complete');
+    }
+  }
+  .mini-game-list li{
+    position: absolute;
+    text-indent: -9999px;
+    background-size: 100% 100%;
+    width: 350px;
+    height: 190px;
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .mini-game-1-chooser {
+    top: 370px;
+    left: 119px;
+  }
+  .mini-game-2-chooser {
+    top: 180px;
+    left: 154px;
+  }
+  .mini-game-3-chooser {
+    top: 140px;
+    left: 469px;
+  }
+  .mini-game-4-chooser {
+    top: 180px;
+    left: 784px;
+  }
+  .mini-game-5-chooser {
+    top: 370px;
+    left: 819px;
+  }
+
+  li.goto-library-chooser .close{
+    @include grunticon('menu-door');
+
+    top: 320px;
+    left: 550px;
+    width: 174px;
+    height: 267px;
+  }
+  li.goto-library-chooser{
+    @include grunticon('menu-door-open');
+
+    top: 338px;
+    left: 505px;
+    width: 216px;
+    height: 267px;
+  }
+
+  .fox-animation {
+    left: 22px;
+    top: 500px;
+  }
+
+  .tent, .wagon {
+    display: none;
+  }
+
+  &.game-is-finished {
+
+    .mini-game-list li.mini-game {
+      width: 321px;
+      height: 185px;
+    }
+
+    @include grunticon('menu-bg-complete');
+    & .tent {
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      display: block;
+      position: absolute;
+      background-size: 100% 100%;
+      @include grunticon('menu-tent-complete');
+
+      left: 0px;
+      top: 101px;
+
+      width: 432px;
+      height: 514px;
+    }
+
+    .wagon {
+      display: block;
+      position: absolute;
+      background-size: 100% 100%;
+
+      width: 1037px;
+      height: 610px;
+
+      left: 232px;
+      top: 65px;
+
+      @include grunticon('menu-wagon-complete');
+    }
+
+    li.goto-library-chooser {
+      width: 204px;
+      height: 235px;
+
+      left: 626px;
+      top: 360px;
+    }
+    .mini-game-1-chooser {
+      left: 280px;
+      top: 390px;
+    }
+    .mini-game-2-chooser {
+      left: 312px;
+      top: 220px;
+    }
+    .mini-game-3-chooser {
+      left: 595px;
+      top: 184px;
+    }
+    .mini-game-4-chooser {
+      left: 878px;
+      top: 220px;
+    }
+    .mini-game-5-chooser {
+      left: 910px;
+      top: 390px;
+    }
+    .fox-animation {
+      left: 150px;
+      bottom: 15px;
+    }
+  }
+
+
+}
+

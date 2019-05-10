@@ -1,0 +1,17 @@
+// 
+// grunticon mixin
+// ---------------
+// 
+// This mixin is used for delivering grunticon-generated icons to different browsers after being string-replaced.
+// 
+// @see: https://github.com/filamentgroup/grunticon
+// @see: https://github.com/erickrdch/grunt-string-replace
+// 
+// data-svg -> all standard browsers
+// data-png -> ie8
+// fallback -> ie7 and lower
+// 
+
+@mixin grunticon($name) {
+	@extend %bg-data-svg-#{$name};
+}

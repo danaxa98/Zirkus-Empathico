@@ -1,0 +1,498 @@
+.b-level-page {
+  @extend %base-page;
+
+  background-size: 100% 100%;
+
+  @for $miniGameId from 1 through 4 {
+    &.mini-game-#{$miniGameId} {
+      @include grunticon('minigame#{$miniGameId}_level_page_bg');
+      background-size: 100% 100%;
+    }
+    &.mini-game-#{$miniGameId} .curtain-left {
+      @include grunticon('minigame#{$miniGameId}_curtain_left');
+    }
+    &.mini-game-#{$miniGameId} .curtain-right {
+      @include grunticon('minigame#{$miniGameId}_curtain_right');
+    }
+    &.mini-game-#{$miniGameId} .close-button {
+      @include grunticon('minigame#{$miniGameId}_btn_close');
+    }
+    &.mini-game-#{$miniGameId} .next-button {
+      @include grunticon('minigame#{$miniGameId}_btn_next');
+    }
+    &.mini-game-#{$miniGameId} .next-button-active{
+      @include grunticon('minigame#{$miniGameId}_btn_next_active');
+    }
+    &.mini-game-#{$miniGameId} .next-button.next-button-finish,
+    &.mini-game-#{$miniGameId} .next-button-finish {
+      @include grunticon('minigame#{$miniGameId}_btn_finish');
+    }
+  }
+
+  &.mini-game-5 .close-button {
+    @include grunticon('minigame5_btn_close');
+  }
+  /*
+  &.mini-game-5 .next-button {
+    @include grunticon('minigame5_btn_next');
+  }*/
+  &.mini-game-5 .next-button-finish {
+    @include grunticon('minigame5_btn_finish');
+  }
+
+
+  @for $miniGameId from 2 through 3 {
+    &.mini-game-#{$miniGameId} .bottom-bar{
+      @include grunticon('minigame#{$miniGameId}_bar_bottom');
+    }
+  }
+
+  &.mini-game-4.show-background-story {
+    background-size: 100% 100%;
+    @include grunticon('minigame4_stage_bubble');
+  }
+  .stage {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .mini-game-1-stage {
+    @include grunticon('minigame1_stage_sliders');
+  }
+
+  .mini-game-4-stage {
+    @include grunticon('minigame4_stage_sliders');
+  }
+
+  .mini-game-5-stage {
+    @include grunticon('minigame5_stage_sliders');
+  }
+/*
+  .background-poster {
+    width: 100%;
+    height: 100%;
+    background-position: 100% 0%;
+    background-size: 85% 85%;
+    background-repeat: no-repeat;
+  }
+  */
+  .backgroundstory {
+    position: absolute;
+
+    width: 41%;
+    height: 71%;
+
+    top: 10%;
+    left: 29%;
+
+    background-size: 100% 100%;
+  }
+
+  .curtain {
+    background-size: 100%;
+    position: absolute;
+    width: 240px;
+    height: 100%;
+    top:0;
+  }
+
+  .curtain-left {
+    left:0px;
+  }
+
+  .curtain-right {
+    right:0px;
+  }
+  &.mini-game-4 .emotion-list {
+    top: 7%;
+    width: 40%;
+    right: 10%;
+    height: 80%;
+    button {
+      position: absolute !important;
+      width: 52%;
+    }
+  }
+  &.mini-game-5 .emotion-list {
+    width: 55.1%;
+    height: 17.8%;
+
+    bottom: 20.3%;
+    left: 25.1%;
+
+    padding-left: 0;
+    button {
+      width: 129px;
+    }
+    button.is-correct:after {
+      top: -15px;
+      height: 140px;
+      width: 138px;
+      left: -5px;;
+    }
+  }
+  .emotion-list {
+    position: absolute;
+    bottom: 0;
+
+    height: 144px;
+    width: 100%;
+    padding-left: 5%;
+    text-align: center;
+  }
+
+  .emotion-list button {
+    background-size: 100% 100%;
+    width: 150px;
+    height: 85%;
+    border: 0;
+  }
+
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    background-repeat: repeat-x !important;
+
+    height: 174px;
+    width: 100%;
+  }
+  button.is-correct:after, button.is-incorrect:after {
+    position: absolute;
+    top: -15px;
+    left: 0px;
+    height: 152px;
+    width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  button.is-correct:after {
+    content: "";
+    background-image: url('../img/highlight_emoticon_correct.svg');
+  }
+  button.is-incorrect:after {
+    content: "";
+    //background-image: url('../img/highlight_emoticon_incorrect.svg');
+  }
+
+
+  .first-option,
+  .second-option,
+  .third-option,
+  .correct-option {
+    position: absolute;
+
+    background-size: 100% 100%;
+    bottom: 20px;
+    width: 150px;
+    height: 70%;
+    border: 0;
+  }
+
+  .first-option {
+    left: 26%;
+  }
+
+  .second-option {
+    left: 44%;
+  }
+
+  .third-option {
+    left: 62%;
+  }
+
+  &.mini-game-2 .video-container {
+    top: 38px;
+    left: 413px;
+    width: 456px;
+    height: 460px;
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+
+    .video {
+      height: 100%;
+    }
+  }
+
+  &.mini-game-3 .video-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    overflow: hidden;
+
+    background-size: 100% 100%;
+
+    .video {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &.mini-game-3 .video-container.video-full-screen-on-option-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    margin-top: -3%;
+  }
+  &.mini-game-3 .video-container.video-full-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+  }
+
+  &.mini-game-4 .video-container.video-emotion {
+    top: 76px;
+    left: 246px;
+
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    overflow: hidden;
+
+    .video {
+      height: 100%;
+      border-radius: 50%;
+      -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+    }
+  }
+
+  .fox-animation {
+    position: absolute;
+    bottom: 22%;
+    left: 8%;
+  }
+
+  .second-hint {
+    position: absolute;
+    left: 53%;
+    bottom: 2%;
+    margin-left: -210px;
+    height: 140px;
+    z-index: 100;
+  }
+
+  .third-hint {
+    display: block;
+    left: 70px;
+    position: absolute;
+    bottom: 126px;
+  }
+
+  .library-card {
+    display: none;
+
+    position: absolute;
+    left: 210px;
+    top: 66px;
+    width: 754px;
+    height: 396px;
+    margin-left: 53px;
+    margin-top: 16px;
+
+    .avatar1,
+    .avatar2,
+    .avatar3,
+    .avatar4 {
+      height: 160px;
+      position: absolute;
+      bottom: 20px;
+    }
+
+    .avatar1 {
+      left: 20px;
+    }
+
+    .avatar2 {
+      left: 27.166667%;
+    }
+
+    .avatar3 {
+      right: 27.166667%;
+    }
+
+    .avatar4 {
+      right: 20px;
+    }
+
+    .hint-eyes {
+      height: 140px;
+      position: absolute;
+      left: 20px;
+      top: 20px;
+    }
+
+    .hint-mouth {
+      height: 140px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+  }
+
+  .correct-option {
+    display: none;
+
+    width: 15%;
+    height: 17%;
+    left: 42%;
+  }
+
+  &.mini-game-4 .hint-video-container {
+      top: 74px;
+      left: 246px;
+
+    width: 300px;
+    height: 300px;
+  }
+  .hint-video-container {
+    display: none;
+
+    position: absolute;
+    top: 74px;
+    left: 246px;
+
+    width: 300px;
+    height: 300px;
+
+    background-size: 100% 100%;
+
+    border-radius: 50%;
+    border: 5px solid rgb(199, 196, 186);
+  }
+  &.mini-game-4 .hint-video-container {
+      border: 5px solid #F9F4D5;
+  }
+
+  &.mini-game-4 .video-emotion video{
+    border: 5px solid #DED4BD;
+  }
+
+  .hint-video-reposition {
+    top: 16%;
+    left: 10%;
+  }
+
+  .skip-button {
+    width: 15%;
+    height: 15%;
+
+    @include grunticon('minigame2_btn_next');
+    background-size: 100% 100%;
+
+    position: absolute;
+    right: 2%;
+    bottom: 25%;
+
+    //TODO: DEBUG MODE
+    //display: block;
+    display: none;
+  }
+
+  .next-button, .next-button:hover {
+    display: none;
+
+    width: 96px;
+    height: 96px;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 1%;
+    bottom: 4%;
+  }
+
+  &.mini-game-3 .next-button-finish,
+  &.mini-game-2 .next-button-finish {
+    right: 5%;
+  }
+
+  .done-button {
+    display: none;
+
+    width: 15%;
+    height: 15%;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 1%;
+    bottom: 4%;
+  }
+
+  .close-button {
+    width: 50px;
+    height: 50px;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    span {
+      @extend %hide-text;
+    }
+  }
+
+  .avatar img{
+    border-radius: 50%;
+    border: 5px solid rgb(199, 196, 186);
+  }
+  &.is-fourth-hint {
+    @include grunticon('minigame2_stage_card');
+
+    .correction-hint-fox {
+      display: block;
+    }
+
+    .video-container {
+      display: none;
+    }
+
+    .library-card {
+      display: block;
+    }
+
+    .correct-option {
+      display: block;
+    }
+
+    .next-button {
+      display: block;
+    }
+
+    .close-button {
+      display: none;
+    }
+
+    .first-option,
+    .second-option,
+    .third-option {
+      display: none;
+    }
+
+    .fox {
+      top: 185px;
+      left: -10px;
+      position: absolute;
+      height: 250px;
+    }
+  }
+
+  &.video-background-blackout {
+    background-color: #000000 !important;
+    background-image: none !important;
+    background: #000000;
+  }
+
+  .stage-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 86%;
+    height: 77%;
+
+    opacity: 0.6;
+    background-size: 100% 100%;
+  }
+}

@@ -1,0 +1,239 @@
+
+$arousalSet: "sad2" "sad1" "neutral" "happy1" "happy2";
+
+@for $arousel from 0 through 4 {
+  $index: $arousel + 1;
+  @for $valence from 0 through 4 {
+    .manikin-state-arousal#{$arousel}-valence#{$valence} {
+        background-image: url('../media/sprits/manikin/manikin_#{nth($arousalSet, $index)}_#{$valence}_sheet.png');
+    }
+  }
+}
+
+
+.manikin {
+
+}
+
+.manikin.manikin-self {
+  position: absolute;
+  left: 575px;
+  bottom: 22.5%;
+
+  width: 193px;
+  height: 382px;
+}
+
+.mini-game-4 .manikin.manikin-self {
+   //left: 76%;
+}
+
+.mini-game-5 .manikin.manikin-self {
+  bottom: 40.8%;
+  //left: 48.5%;
+}
+/*
+.manikin-slider-valence {
+  width: 70%;
+  height: 1%;
+
+  position: absolute;
+  bottom: 13%;
+  left: 13%;
+}
+.manikin-slider-arousal {
+  width: 1%;
+  height: 47%;
+
+  position: absolute;
+  top: 15px;
+  left: 4%;
+}
+*/
+.manikin-slider-arousal-ui .noUi-base {
+  position: absolute;
+  height: 346px;
+  width: 8px;
+  left: 76px;
+  top: 144px;
+}
+.manikin-slider-valence-ui .noUi-base {
+  position: absolute;
+  width: 690px;
+  height: 8px;
+  left: 325px;
+  top: 636px;
+}
+
+.manikin-slider-arousal-min {
+  left: 52px;
+  top: 531px;
+}
+.manikin-slider-arousal-max {
+  left: 52px;
+  top: 55px;
+}
+.manikin-slider-valence-min {
+  left: 236px;
+  top: 612px;
+}
+.manikin-slider-valence-max {
+  left: 1058px;
+  top: 612px;
+}
+
+.manikin-slider-arousal-min,
+.manikin-slider-valence-min,
+.manikin-slider-arousal-max,
+.manikin-slider-valence-max,{
+  background-size: 100% 100%;
+  width: 56px;
+  height: 56px;
+  content: attr(data-state);
+  display: block;
+  position: absolute;
+}
+@each $miniGameId in 1, 4, 5 {
+  .mini-game-#{$miniGameId} div.manikin-slider-arousal-max{
+    @include grunticon('minigame#{$miniGameId}_slider2_btn1');
+  }
+  .mini-game-#{$miniGameId} div.manikin-slider-arousal-min{
+    @include grunticon('minigame#{$miniGameId}_slider2_btn2');
+  }
+
+  .mini-game-#{$miniGameId} div.manikin-slider-valence-min{
+    @include grunticon('minigame#{$miniGameId}_slider1_btn1');
+  }
+  .mini-game-#{$miniGameId} div.manikin-slider-valence-max{
+    @include grunticon('minigame#{$miniGameId}_slider1_btn2');
+  }
+  .mini-game-#{$miniGameId} .noUi-horizontal .noUi-handle{
+    @include grunticon('minigame#{$miniGameId}_slider_handle1');
+  }
+  .mini-game-#{$miniGameId} .noUi-vertical .noUi-handle{
+    @include grunticon('minigame#{$miniGameId}_slider_handle2');
+  }
+}
+
+//Library Card
+
+.b-library div.manikin-slider-arousal-max{
+  @include grunticon('help_slider2_btn1');
+}
+.b-library div.manikin-slider-arousal-min{
+  @include grunticon('help_slider2_btn2');
+}
+
+.b-library div.manikin-slider-valence-min{
+  @include grunticon('help_slider1_btn1');
+}
+.b-library div.manikin-slider-valence-max{
+  @include grunticon('help_slider1_btn2');
+}
+.b-library .noUi-horizontal .noUi-handle{
+  @include grunticon('help_slider_handle1');
+}
+.b-library .noUi-vertical .noUi-handle{
+  @include grunticon('help_slider_handle2');
+}
+
+.slider-wrapper{
+  margin: 10% auto;
+  width: 600px;
+  height: 500px;
+}
+#slider{
+  width: 100%;
+}
+.noUi-background {
+  background: transparent;
+  box-shadow: none;
+}
+.noUi-horizontal {
+  height: 18px;
+}
+.noUi-target {
+  background-color: transparent;
+
+}
+.noUi-horizontal .noUi-base {
+  background-color: #AAABA8;
+  border-radius: 11px;
+  /*
+  width: 73%;
+  height: 50%;
+  position: relative;
+  margin: 24px 35px 24px 45px;
+  */
+}
+.noUi-vertical .noUi-base {
+  background-color: #AAABA8;
+  border-radius: 11px;
+
+  /*
+  width: 11px;
+  height: 100%;
+  position: relative;
+  margin: 35px 24px 45px 24px;
+  */
+}
+.mini-game-1 .noUi-base {
+  background-color: #6185A6;
+}
+.mini-game-4 .noUi-base {
+  background-color: #B68D26;
+}
+.mini-game-5 .noUi-base {
+  background-color: #3F9583;
+}
+.noUi-handle {
+  position: relative;
+  z-index: 1;
+  //background-image: url('minigame4_slider_handle1.svg');
+  background-size: 100% 100%;
+}
+.noUi-handle:after, .noUi-handle:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 14px;
+  width: 1px;
+  background: transparent;
+  left: 14px;
+  top: 6px;
+}
+.noUi-horizontal .noUi-handle{
+  width: 72px;
+  height: 72px;
+  left: -32px;
+  top: -32px;
+}
+.noUi-vertical .noUi-handle {
+  width: 72px;
+  height: 72px;
+  left: -32px;
+  top: -32px;
+}
+.noUi-target, .noUi-target * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.noUi-horizontal .noUi-origin {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+.noUi-vertical .noUi-origin {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}

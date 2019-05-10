@@ -1,0 +1,19 @@
+.b-loading-page {
+  @extend %base-page;
+
+  background-image: url('../img/forest.svg');
+  background-size: 100% 100%;
+
+  display: block;
+
+  .next-link {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .fox-animation {
+    bottom: 6%;
+    left: 17%;
+  }
+}
