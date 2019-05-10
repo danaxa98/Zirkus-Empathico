@@ -1,0 +1,46 @@
+build
+dist
+docs
+jsdocs
+node_modules
+reports
+styleguide
+source/bower_components
+tmp
+
+source/img/bgs/png-fallback
+source/img/bgs/svgmin
+source/media/videos/context
+source/media/videos
+
+.DS_Store
+.idea
+Thumbs.db
+
+*.bundle
+*.cache
+*.log
+*.sass-cache
+*.sublime-project
+*.sublime-workspace
+*.temp
+*.tmp
+
+#cordova
+wrapper/*
+!wrapper/config.xml
+
+# Non-project-specific build files:
+build.xml
+local.properties
+gradlew
+gradlew.bat
+gradle
+# Ant builds
+ant-built
+ant-gen
+
+# Eclipse builds
+gen
+out
+
