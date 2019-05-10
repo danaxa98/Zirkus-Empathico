@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="1600px" height="900px" viewBox="0 0 1600 900" enable-background="new 0 0 1600 900" xml:space="preserve">
+<g>
+	<g>
+		<rect fill="#6C0900" width="1600" height="900"/>
+	</g>
+	<g>
+		<g>
+			<g>
+				<rect fill="#811200" width="53.999" height="900"/>
+				<rect x="96.625" fill="#811200" width="54" height="900"/>
+				<rect x="193.249" fill="#811200" width="54.001" height="900"/>
+				<rect x="289.875" fill="#811200" width="54" height="900"/>
+				<rect x="386.499" fill="#811200" width="53.999" height="900"/>
+				<rect x="483.123" fill="#811200" width="54.001" height="900"/>
+				<rect x="579.75" fill="#811200" width="54.001" height="900"/>
+				<rect x="676.375" fill="#811200" width="54" height="900"/>
+				<rect x="869.626" fill="#811200" width="54" height="900"/>
+				<rect x="773.001" fill="#811200" width="53.999" height="900"/>
+				<rect x="966.252" fill="#811200" width="53.998" height="900"/>
+				<rect x="1062.877" fill="#811200" width="53.999" height="900"/>
+				<rect x="1159.503" fill="#811200" width="53.997" height="900"/>
+				<rect x="1256.127" fill="#811200" width="53.999" height="900"/>
+				<rect x="1352.751" fill="#811200" width="53.999" height="900"/>
+				<rect x="1449.377" fill="#811200" width="53.997" height="900"/>
+				<rect x="1546.003" fill="#811200" width="53.997" height="900"/>
+			</g>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<g>
+			<circle fill="#AC2400" cx="800" cy="336" r="300"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<rect y="684" fill="#C22D00" width="1600" height="216"/>
+		<rect x="0.699" y="684" fill="#AC2400" width="1600" height="16"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path fill="#69C4BA" d="M0,900V0h300C272.004,88.207,192.706,224.418,96.922,282.29C105.126,487.491,80.347,713.355,31.534,900H0z
+			"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path fill="#69C4BA" d="M1600,900V0h-300c27.996,88.207,107.293,224.418,203.078,282.29
+			c-8.205,205.202,16.574,431.066,65.387,617.71H1600z"/>
+	</g>
+</g>
+<path fill="#3F9583" d="M0,234.726C25.373,258.6,63.092,276.358,104.923,277.8c0,4.988-4.002,10.606-7.712,10.484
+	c-30.583,1.663-77.341-11.981-96.854-31.605L0,234.726z"/>
+<path fill="#3F9583" d="M1600,234.726c-25.373,23.875-63.092,41.633-104.923,43.074c0,4.988,4.002,10.606,7.712,10.484
+	c30.583,1.663,77.341-11.981,96.854-31.605L1600,234.726z"/>
+</svg>
