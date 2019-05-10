@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="de.zirkus_empathico.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Zirkus Empathico</name>
+    <content src="index.html" />
+    <icon src="www/media/icon/192.png" />
+    <platform name="android">
+        <icon density="ldpi" src="www/media/icon/48.png" />
+        <icon density="hdpi" src="www/media/icon/48.png" />
+        <icon density="mdpi" src="www/media/icon/72.png" />
+        <icon density="xhdpi" src="www/media/icon/96.png" />
+        <icon density="xxhdpi" src="www/media/icon/144.png" />
+        <icon density="xxxhdpi" src="www/media/icon/192.png" />
+    </platform>
+    <preference name="Fullscreen" value="true" />
+    <preference name="WebViewBounce" value="false" />
+    <preference name="orientation" value="landscape" />
+    <preference name="android-installLocation" value="preferExternal" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+
+    <allow-navigation href="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+
+    <plugin name="cordova-plugin-device" spec="^1.0.0" />
+    <plugin name="cordova-plugin-media" spec="^1.0.0" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.0.0" />
+    <plugin name="cordova-plugin-network-information" spec="^1.0.0" />
+    <engine name="android" spec="4.1.1" />
+</widget>
