@@ -1,0 +1,293 @@
+---
+title: Empathie-Training
+layout: lyt-default.hbs
+---
+<div class="jsb_ jsb_Router" data-jsb="">
+
+    <div class="jsb_ jsb_StartPage b-start-page" data-jsb="path=start&amp;id=start&amp;title=Start">
+        <div class="tent"><a href="main.html#reward-page"></a></div>
+        <div class="wagon"></div>
+        <ul class="mini-game-list">
+            <li class="mini-game mini-game-1-chooser">
+                <a href="#start" data-minigameid="1">
+                    Minigame 1
+                </a>
+            </li>
+            <li class="mini-game mini-game-2-chooser">
+                <a href="#start" data-minigameid="2">
+                    Minigame 2
+                </a>
+            </li>
+            <li class="mini-game mini-game-3-chooser">
+                <a href="#start" data-minigameid="3">
+                    Minigame 3
+                </a>
+            </li>
+            <li class="mini-game mini-game-4-chooser">
+                <a href="#start" data-minigameid="4">
+                    Minigame 4
+                </a>
+            </li>
+            <li class="mini-game mini-game-5-chooser">
+                <a href="#start" data-minigameid="5">
+                    Minigame 5
+                </a>
+            </li>
+            <li class="goto-library-chooser">
+                <a href="#start">
+                    Goto Library
+                </a>
+            </li>
+        </ul>
+
+        <div class="fox-animation"></div>
+
+        <audio class="audio"></audio>
+        <audio class="background-audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+    </div>
+
+    <div class="jsb_ jsb_ChooseLevelPage b-choose-level-page" data-jsb="path=choose-level/:miniGameId&amp;id=choose-level&amp;title=Wähle ein Level">
+        <ul class="level-choosers">
+            <li class="level-chooser">
+                <a href="#play-level/25">
+                    1
+                </a>
+            </li>
+        </ul>
+        <ul class="level-presents">
+            <li class="level-present"> </li>
+        </ul>
+        <div class="fox-animation"></div>
+        <div class="level-progress"></div>
+        <div class="level-home"><a href="#start"></a></div>
+        <div class="level-next"><a href=""></a></div>
+        <div class="level-won-award"></div>
+        <audio class="audio"></audio>
+        <audio class="background-audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+    </div>
+
+    <div class="jsb_ jsb_LevelPage b-level-page" data-jsb="path=play-level/:id&amp;id=level&amp;title=Level">
+        <div class="stage-background"> </div>
+
+        <div class="stage">
+
+            <div class="library-card">
+                <img class="hint-eyes" src="media/images/black.png" alt="Take a look on the eyes"/>
+                <img class="hint-mouth" src="media/images/black.png" alt="Take a look on the mouth"/>
+                <div class="avatar">
+                    <img class="avatar1" src="media/images/black.png" alt=""/>
+                </div>
+                <div class="avatar">
+                    <img class="avatar2" src="media/images/black.png" alt=""/>
+                </div>
+                <div class="avatar">
+                    <img class="avatar3" src="media/images/black.png" alt=""/>
+                </div>
+                <div class="avatar">
+                    <img class="avatar4" src="media/images/black.png" alt=""/>
+                </div>
+            </div>
+            <div class="backgroundstory" style="display:none;"></div>
+
+            <div class="video-container">
+                <video class="video"></video>
+            </div>
+
+            <div class="hint-video-container">
+
+            </div>
+
+            <div class="fox-animation"></div>
+
+            <img class="fox second-hint" src="img/hint2_joyful_eyes.svg" alt="Fox point again to eyes" />
+        </div>
+
+        <div class="emotion-list" style="display:none;"></div>
+        <!-- <div class="rays" style="display:none;"></div> -->
+        <div class="bottom-bar">
+            <button class="first-option"><span></span></button>
+            <button class="second-option"><span></span></button>
+            <button class="third-option"><span></span></button>
+        </div>
+        <div class="curtain curtain-left"></div>
+        <div class="curtain curtain-right"></div>
+
+        <div class="manikin manikin-slider-arousal" style="display: none;">
+            <div class="manikin manikin-slider-arousal-min"></div>
+            <div class="manikin manikin-slider-arousal-ui"></div>
+            <div class="manikin manikin-slider-arousal-max"></div>
+        </div>
+
+        <div class="manikin manikin-slider-valence" style="display: none;">
+            <div class="manikin manikin-slider-valence-min"></div>
+            <div class="manikin manikin-slider-valence-ui"></div>
+            <div class="manikin manikin-slider-valence-max"></div>
+        </div>
+
+
+        <div class="manikin manikin-self" style="display: none;"></div>
+
+        <audio class="audio"></audio>
+        <audio class="background-audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+
+
+
+        <button class="correct-option"><span></span></button>
+        <button class="next-button"><span></span></button>
+        <button class="done-button"><span></span></button>
+        <button class="home-button"><span></span></button>
+        <button class="close-button"><span>Schließen</span></button>
+        <button class="skip-button"><span>Skip</span></button>
+    </div>
+
+    <div class="jsb_ jsb_RewardPage b-reward-page" data-jsb="path=reward-page&amp;id=reward-page&amp;title=Reward-System">
+        <div class="circus-stage">
+        </div>
+        <div class="circus-icon-list">
+
+        </div>
+
+        <div class="fox-animation"></div>
+
+        <a href="#start" class="next-link" style="display: none;">
+
+        </a>
+
+        <audio class="audio win-sound">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+
+        <audio class="background-audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+    </div>
+
+    <div class="jsb_ jsb_Library b-library" data-jsb="path=library&amp;id=library&amp;title=Library">
+        <a href="" class="next-link">
+            <!-- <img class="win-screen" src="img/win_screen.png" alt="You won!"/> -->
+        </a>
+
+        <ul class="cards">
+            <li class="card card-1"><a href="#library" data-name="neutral"></a></li>
+            <li class="card card-2"><a href="#library" data-name="sad"></a></li>
+            <li class="card card-3"><a href="#library" data-name="surprised"></a></li>
+            <li class="card card-4"><a href="#library" data-name="joyful"></a></li>
+            <li class="card card-5"><a href="#library" data-name="angry"></a></li>
+            <li class="card card-6"><a href="#library" data-name="anxious"></a></li>
+            <li class="card card-7"><a href="#library" data-name="manikin"></a></li>
+        </ul>
+
+        <div class="fox-animation"></div>
+
+        <div class="modal-view">
+            <div class="emotion-icon"></div>
+            <div class="emotion-mouth"></div>
+            <div class="emotion-eyes"></div>
+            <div class="emotion-manikin"></div>
+            <div class="emotion-face"></div>
+            <div class="emotion-context"></div>
+        </div>
+
+        <audio class="audio win-sound">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+        <audio class="background-audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+
+        <div class="manikin manikin-slider-arousal" style="display: none;">
+            <div class="manikin manikin-slider-arousal-min"></div>
+            <div class="manikin manikin-slider-arousal-ui"></div>
+            <div class="manikin manikin-slider-arousal-max"></div>
+        </div>
+
+        <div class="manikin manikin-slider-valence" style="display: none;">
+            <div class="manikin manikin-slider-valence-min"></div>
+            <div class="manikin manikin-slider-valence-ui"></div>
+            <div class="manikin manikin-slider-valence-max"></div>
+        </div>
+
+
+        <div class="manikin manikin-self" style="display: none;"></div>
+
+        <button class="close-button"><span>Schließen</span></button>
+        <button class="home"><span>Home</span></button>
+
+    </div>
+
+    <div class="jsb_ jsb_Settings b-settings" data-jsb="path=settings&amp;id=settings&amp;title=Setting"
+         style="display: none">
+        <h1>Settings</h1>
+        <p>Here are the hidden Setting Screen for the App.</p>
+
+        <h2>Clear all Local Storage Data</h2>
+        <p><button class="clear-all-data">Clear Data now</button></p>
+        <p>&nbsp;</p>
+        <h2>Toggle Debug Mode</h2>
+        <p><button class="set-debug-mode">Activate or deactivate Debug mode</button></p>
+        <p>&nbsp;</p>
+
+        <h2>Toggle Demo Mode</h2>
+        <p><button class="set-demo-mode">Activate or deactivate Demo mode</button></p>
+        <p>&nbsp;</p>
+
+        <h2>Test all Images based on the videos (see console for output)</h2>
+        <p><button class="run-test">Start Test</button></p>
+        <ul class="run-test-result"></ul>
+        <p>&nbsp;</p>
+
+        <h2>Set Progress for each Mini Game</h2>
+        <p>
+            Mini Game
+            <select class="set-progress-mg">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+            , Level
+            <select class="set-progress-level">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option selected="selected">6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+            </select>
+            and progress of the last level
+            <select class="set-progress-last-level">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option selected="selected">9</option>
+                <option>10</option>
+            </select>
+            <button class="set-progress">Set progress</button>
+        </p>
+        <p>&nbsp;</p>
+        <audio class="audio">
+            <!-- <source src="media/audios/win_sound.mp3"/> -->
+        </audio>
+    </div>
+
+	<div class="jsb_ jsb_Tracking">
+
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<script type="text/javascript" data-main="app" src="bower_components/requirejs/require.js"></script>
+
+<script>
+require.config({
+    baseUrl: "js/",
+    urlArgs: "cb={{now "%s"}}",
+    paths: {
+        'jsb': '../bower_components/jsb/jsb',
+		'cordova': '../cordova',
+        'jquery': '../bower_components/jquery/jquery.min',
+        'underscore': '../bower_components/underscore/underscore',
+        'logging': '../bower_components/logging.js/logging',
+        'Backbone': '../bower_components/backbone/backbone',
+        'store': '../bower_components/store.js/store',
+        'uuid': '../bower_components/node-uuid/uuid',
+        'nouislider': '../bower_components/nouislider/distribute/jquery.nouislider.all'
+    },
+
+    shim: {
+        'underscore': {
+            exports: '_'
+        },
+        'jsb': {
+            exports: 'jsb',
+            deps: ['jquery', 'underscore']
+        },
+        'modernizr': {
+            exports: 'Modernizr'
+        },
+        'Backbone': {
+            deps: ['underscore', 'jquery']
+        },
+        'nouislider': {
+            deps: ['jquery']
+        }
+    }
+});
+
+</script>
