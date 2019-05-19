@@ -1,0 +1,2 @@
+Dieser Ordner dient im dev branch dazu, Dateien zwischen den Teammitgliedern auszutauschen, die für das Projekt nötig sind. 
+Zum Hochladen von Dokumenten o.Ä. benutzen wie die Hochlademöglichkeit von Trello.
