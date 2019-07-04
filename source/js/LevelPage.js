@@ -5,8 +5,7 @@ define('LevelPage',
         'task-page/mg3/Controller',
         'task-page/mg4/Controller',
         'task-page/mg5/Controller',
-        'AdaptiveSystem',
-        'store'],
+        'AdaptiveSystem'],
     function(jsb, logging, $, _, BasePage, levels,
              localStorage,
              mg1Controller,
@@ -14,8 +13,7 @@ define('LevelPage',
              mg3Controller,
              mg4Controller,
              mg5Controller,
-             AdaptiveSystem,
-             store
+             AdaptiveSystem
         )
 {
     "use strict";
@@ -227,14 +225,18 @@ define('LevelPage',
         var that = this;
 
         if (that.level.miniGameId == 2){
-            let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
+
             localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
+
+            let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
+
             let eScores = localStorage.getEmotionScores();
 
             for (var i = 0; i < eScores.length; i++){
                 if ( localStorage.getLastEmotionPlayed() === eScores[i][0])
                 eScores[i][1] = eScores[i][1] + eScoreChange;
             }
+
             localStorage.setEloScore( Math.round(eScores.reduce((x, y) => x+y[1], 0) / eScores.length) );
             localStorage.setEmotionScores(eScores);
             

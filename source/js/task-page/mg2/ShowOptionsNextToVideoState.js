@@ -78,11 +78,6 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
         for (var i = 1; i <= localStorage.getNumberOfChoicesForCurrentTask(); i++)
             that.showOption(i, true);
 
-        // that.showOption(2, true);
-        // that.showOption(3, true);
-        // that.showOption(4, true);
-        // that.showOption(5, true);
-        // that.showOption(6, true);
     };
 
     ShowOptionsNextToVideoState.prototype.showOption = function(facePosition, withoutFadingAndSound)
@@ -92,6 +87,7 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
 
         this.domElement.find(optionSelectors[facePosition - 1]).css('background-image',
                 'url("img/emotion_' + this.options.level.options[facePosition - 1] + '.svg")');
+
         this.domElement.find(optionSelectors[facePosition - 1]).addClass('is-used');
 
         if (withoutFadingAndSound) {
