@@ -559,7 +559,55 @@ define('services/LocalStorage',
      */
     LocalStorage.prototype.setCurrentTimeConstraint = function(time) {
         return store.set('_ADAPTIVE_timeConstraint', time);
-    };   
+    };
+    
+    /**
+     *
+     * @returns {Integer} ID
+     */
+    LocalStorage.prototype.getCurrentTimerID = function() {
+        return store.get('_ADAPTIVE_timerID') || -1;
+    };
+
+    /**
+     * 
+     * @param {Integer} ID   
+     */
+    LocalStorage.prototype.setCurrentTimerID = function(ID) {
+        return store.set('_ADAPTIVE_timerID', ID);
+    };
+
+    /**
+     *
+     * @returns {Boolean} ID
+     */
+    LocalStorage.prototype.isCurrentTimeConstraintAchieved = function() {
+        return store.get('_ADAPTIVE_timerConstraintAchieved');
+    };
+
+    /**
+     * 
+     * @param {Boolean} achieved   true: time hasn't run up yet, false: time over
+     */
+    LocalStorage.prototype.setCurrentTimeConstraintAchieved = function(achieved) {
+        return store.set('_ADAPTIVE_timerConstraintAchieved', achieved);
+    }; 
+
+    /**
+     *
+     * @returns {Float} ID
+     */
+    LocalStorage.prototype.getCurrentScoreChange = function() {
+        return store.get('_ADAPTIVE_currentScoreChange') || 0;
+    };
+
+    /**
+     * 
+     * @param {Float} number   true: time hasn't run up yet, false: time over
+     */
+    LocalStorage.prototype.setCurrentScoreChange = function(number) {
+        return store.set('_ADAPTIVE_currentScoreChange', number);
+    };     
 
     return new LocalStorage();
 });

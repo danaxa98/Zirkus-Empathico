@@ -226,9 +226,17 @@ define('LevelPage',
 
         if (that.level.miniGameId == 2){
 
+            clearTimeout(localStorage.getCurrentTimerID() );
+
+            if ( localStorage.isCurrentTimeConstraintAchieved() == false )
+                successfully = false;
+
             localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
 
             let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
+
+
+            localStorage.setCurrentScoreChange(eScoreChange);
 
             let eScores = localStorage.getEmotionScores();
 

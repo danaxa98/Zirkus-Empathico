@@ -46,6 +46,11 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
 
             tasks = this.getTasksByMiniGameIdAndEmotionAndChoices(miniGameId, chosenEmotion[0], taskConstraints[0] );
 
+            localStorage.setCurrentTimeConstraintAchieved(true);
+
+            //setting time for timeconstraint + 10 seconds for fox explaining video and options
+            localStorage.setCurrentTimerID( setTimeout( function(){ localStorage.setCurrentTimeConstraintAchieved(false)}, localStorage.getCurrentTimeConstraint() * 1000 + 10000 ) );
+
         }
 
         
