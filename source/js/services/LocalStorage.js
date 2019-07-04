@@ -486,7 +486,7 @@ define('services/LocalStorage',
      * @returns {Array} an array of emotion (string) and score (float) 
      */
     LocalStorage.prototype.getEmotionScores = function() {
-        return store.get('_ADAPTIVE_emotionScores') || [['angry', 3200], ['anxious', 3400], ['joyful', 3650], ['neutral', 3100], ['sad', 3200], ['suprised', 3300]];
+        return store.get('_ADAPTIVE_emotionScores') || [['angry', 3120], ['anxious', 3120], ['joyful', 3120], ['neutral', 3120], ['sad', 3120], ['surprised', 3120]];
     };
 
     /**

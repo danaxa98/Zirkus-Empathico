@@ -18,7 +18,7 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
     let elo = Math.round(eArray.reduce((x, y) => x+y[1], 0) / eArray.length);
     const DISTRIBUTE_WEIGHT = [0.2, 0.4, 0.58, 0.74, 0.88, 1];
     const DELTA_N = 0.1;
-    const WANTED_CHANCE = 0.75;
+    const WANTED_CHANCE = 0.70;
     const WANTED_BASE_CHANCES = [2, 3, 4, 5, 6].map(n => (WANTED_CHANCE*n-1)/(n-1));
     const LAMBDA = 1/3;
     const TIME_MIDDLE = 20;
