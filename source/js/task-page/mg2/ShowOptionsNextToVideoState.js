@@ -22,45 +22,51 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
             that.currentTimout = setTimeout(function()
             {
                 that.showOption(2, false);
+                if ( localStorage.getNumberOfChoicesForCurrentTask() == 2){
+                    that.clearClickPrevention();
+                    setTimeout(that.options.completeCallback, 0);
+                }                
                 that.currentTimout = setTimeout(function()
                 {
-                    that.showOption(3, false);
-                    if ( that.options.level.options.length == 3){
-                        that.clearClickPrevention();
-                        setTimeout(that.options.completeCallback, 0);
-                    }
-                    that.currentTimout = setTimeout(function()
-                    {
-                        if ( that.options.level.options.length > 3) {
-                            that.showOption(4, false);
-                            if ( that.options.level.options.length == 4){
-                                that.clearClickPrevention();
-                                setTimeout(that.options.completeCallback, 0);
-                            }
-                            that.currentTimout = setTimeout(function()
-                            {
-                                if ( that.options.level.options.length > 4) {
-                                    that.showOption(5, false);
-                                    if ( that.options.level.options.length == 5){
-                                        that.clearClickPrevention();
-                                        setTimeout(that.options.completeCallback, 0);
-                                    }
-                                    that.currentTimout = setTimeout(function()
-                                    {
-                                        if ( that.options.level.options.length > 5) {
-                                            that.clearClickPrevention();
-                                            that.showOption(6, false);
-                                            that.currentTimout = setTimeout(function() {
-                                                //Disable hint for the further game instruction
-                                                //that.startInactivityTimer();
-                                                setTimeout(that.options.completeCallback, 0);
-                                            }, 2000);
-                                        }
-                                    }, 2000);
-                                }
-                            }, 2000);
+                    if ( localStorage.getNumberOfChoicesForCurrentTask() > 2){
+                        that.showOption(3, false);
+                        if ( localStorage.getNumberOfChoicesForCurrentTask() == 3){
+                            that.clearClickPrevention();
+                            setTimeout(that.options.completeCallback, 0);
                         }
-                    }, 2000);
+                        that.currentTimout = setTimeout(function()
+                        {
+                            if ( localStorage.getNumberOfChoicesForCurrentTask() > 3) {
+                                that.showOption(4, false);
+                                if ( localStorage.getNumberOfChoicesForCurrentTask() == 4){
+                                    that.clearClickPrevention();
+                                    setTimeout(that.options.completeCallback, 0);
+                                }
+                                that.currentTimout = setTimeout(function()
+                                {
+                                    if ( localStorage.getNumberOfChoicesForCurrentTask() > 4) {
+                                        that.showOption(5, false);
+                                        if ( localStorage.getNumberOfChoicesForCurrentTask() == 5){
+                                            that.clearClickPrevention();
+                                            setTimeout(that.options.completeCallback, 0);
+                                        }
+                                        that.currentTimout = setTimeout(function()
+                                        {
+                                            if ( localStorage.getNumberOfChoicesForCurrentTask() > 5) {
+                                                that.clearClickPrevention();
+                                                that.showOption(6, false);
+                                                that.currentTimout = setTimeout(function() {
+                                                    //Disable hint for the further game instruction
+                                                    //that.startInactivityTimer();
+                                                    setTimeout(that.options.completeCallback, 0);
+                                                }, 2000);
+                                            }
+                                        }, 2000);
+                                    }
+                                }, 2000);
+                            }
+                        }, 2000);
+                    }
                 }, 2000);
             }, 2000);
         });
@@ -83,7 +89,6 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
     ShowOptionsNextToVideoState.prototype.showOption = function(facePosition, withoutFadingAndSound)
     {
         var optionSelectors = ['.first-option', '.second-option', '.third-option','.fourth-option', '.fifth-option', '.sixth-option'];
-
 
         this.domElement.find(optionSelectors[facePosition - 1]).css('background-image',
                 'url("img/emotion_' + this.options.level.options[facePosition - 1] + '.svg")');
