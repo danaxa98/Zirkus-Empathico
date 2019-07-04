@@ -288,6 +288,19 @@ define('services/LocalStorage',
             return relativePath.replace(/\/?media\//g, deviceUrl);
         }
 
+        // this.logDebug('storeBJ before: ', store.getAll() );
+        // let jsonData = store.serialize( store.getAll() )
+
+        // let retrievedData = store.deserialize(jsonData);
+
+
+
+        // for (var key in retrievedData) {
+
+        //     store.set(key, retrievedData[key]);
+
+        //     }
+        
         return relativePath;
     };
 
@@ -436,6 +449,117 @@ define('services/LocalStorage',
         store.set('demo-mode', val);
     };
 
+    /**
+     * Get the last Emotion that was played.
+     * @returns {String} String of the emotion played
+     */
+    LocalStorage.prototype.getLastEmotionPlayed = function() {
+        return store.get('_ADAPTIVE_emotionPlayed') || null;
+    };
+
+/**
+     * Set the last Emotion that was played.
+     * @param {String} emotion String of the emotion played
+     */
+    LocalStorage.prototype.setLastEmotionPlayed = function(emotion) {
+        return store.set('_ADAPTIVE_emotionPlayed', emotion);
+    };
+
+    /**
+     *
+     * @returns {Integer} number of Choices for the task
+     */
+    LocalStorage.prototype.getNumberOfChoicesForCurrentTask = function() {
+        return store.get('_ADAPTIVE_numberOfChoices') || 0;
+    };
+
+    /**
+     * 
+     * @param {Integer} number number of Choices for the task
+     */
+    LocalStorage.prototype.setNumberOfChoicesForCurrentTask = function(number) {
+        return store.set('_ADAPTIVE_numberOfChoices', number);
+    };
+
+    /**
+     *
+     * @returns {Array} an array of emotion (string) and score (float) 
+     */
+    LocalStorage.prototype.getEmotionScores = function() {
+        return store.get('_ADAPTIVE_emotionScores') || [['angry', 3200], ['anxious', 3400], ['joyful', 3650], ['neutral', 3100], ['sad', 3200], ['suprised', 3300]];
+    };
+
+    /**
+     *  eArray = [[emotion.ANGRY, 3200], [emotion.ANXIOUS, 3400], [emotion.JOYFUL, 3650], [emotion.NEUTRAL, 3100], [emotion.SAD, 3200], [emotion.SURPRISED, 3300]];
+     * @param {Array} emotionScoresArray an array of emotion (string) and score (float) (see above)
+     */
+    LocalStorage.prototype.setEmotionScores = function(emotionScoresArray) {
+        return store.set('_ADAPTIVE_emotionScores', emotionScoresArray);
+    };
+
+    /**
+     *
+     * @returns {Integer} number of Games played
+     */
+    LocalStorage.prototype.getNumberOfGamesPlayed = function() {
+        return store.get('_ADAPTIVE_gamesPlayed') || 0;
+    };
+
+    /**
+     * 
+     * @param {Integer} number  number of Games played
+     */
+    LocalStorage.prototype.setNumberOfGamesPlayed = function(number) {
+        return store.set('_ADAPTIVE_gamesPlayed', number);
+    };
+
+    /**
+     *
+     * @returns {Float} expected successrate between 0 and 1
+     */
+    LocalStorage.prototype.getExpectedSuccessRate = function() {
+        return store.get('_ADAPTIVE_expectedSuccessRate') || 0;
+    };
+
+    /**
+     * 
+     * @param {Float} number   expected successrate
+     */
+    LocalStorage.prototype.setExpectedSuccessRate = function(number) {
+        return store.set('_ADAPTIVE_expectedSuccessRate', number);
+    };
+
+    /**
+     *
+     * @returns {Float} get the user elo score
+     */
+    LocalStorage.prototype.getEloScore = function() {
+        return store.get('_ADAPTIVE_userScore') || Math.round(this.getEmotionScores().reduce((x, y) => x+y[1], 0) / this.getEmotionScores().length);
+    };
+
+    /**
+     * 
+     * @param {Float} number   set the user elo score
+     */
+    LocalStorage.prototype.setEloScore = function(number) {
+        return store.set('_ADAPTIVE_userScore', number);
+    };
+
+    /**
+     *
+     * @returns {Float} time in seconds, -1 for infinite?
+     */
+    LocalStorage.prototype.getCurrentTimeConstraint = function() {
+        return store.get('_ADAPTIVE_timeConstraint') || -1;
+    };
+
+    /**
+     * 
+     * @param {Float} time   in seconds
+     */
+    LocalStorage.prototype.setCurrentTimeConstraint = function(time) {
+        return store.set('_ADAPTIVE_timeConstraint', time);
+    };   
 
     return new LocalStorage();
 });

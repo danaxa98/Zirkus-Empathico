@@ -12,8 +12,8 @@
  * @property {String} excludePerson - A list of person who not be selected as face video
  * like 'context_NAME_EXTENTION.mp4'.
  */
-define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks'],
-    function(jsb, logging, localStorage, tasksData)
+define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks', 'AdaptiveSystem', 'store'],
+    function(jsb, logging, localStorage, tasksData, AdaptiveSystem, store)
 {
     "use strict";
 
@@ -28,7 +28,53 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
      * @returns {Task}
      */
     Tasks.prototype.getRandomNextTaskByMiniGameIdAndLevelId = function(miniGameId, levelId) {
+
         var tasks = this.getTasksByMiniGameIdAndLevelId(miniGameId, levelId);
+
+        if (miniGameId === 2){
+
+            const emotion = {
+                ANGRY: "angry",
+                ANXIOUS: "anxious",
+                JOYFUL: "joyful",
+                NEUTRAL: "neutral",
+                SAD: "sad",
+                SURPRISED: "surprised"
+            };
+
+            var eArray = localStorage.getEmotionScores();
+            
+            // if (!eArray){
+            //     eArray = [[emotion.ANGRY, 3200], [emotion.ANXIOUS, 3400], [emotion.JOYFUL, 3650], [emotion.NEUTRAL, 3100], [emotion.SAD, 3200], [emotion.SURPRISED, 3300]];
+            //     store.set('_ADAPTIVE_emotionScores', eArray);
+            // }
+
+            // store.set('_ADAPTIVE_userScore', Math.round(eArray.reduce((x, y) => x+y[1], 0) / eArray.length) );
+
+            // if (!store.get('_ADAPTIVE_gamesPlayed'))
+            //     store.set('_ADAPTIVE_gamesPlayed', 0);
+
+            var chosenEmotion = AdaptiveSystem.chooseEmotion( eArray );
+            
+            console.log(chosenEmotion);
+
+            var taskArray = AdaptiveSystem.generateTask(chosenEmotion[0], chosenEmotion[1], localStorage.getEloScore() );
+
+            console.log(taskArray);
+            
+            localStorage.setLastEmotionPlayed(chosenEmotion[0]);
+            localStorage.setNumberOfChoicesForCurrentTask(taskArray[0]);
+
+            
+            localStorage.setCurrentTimeConstraint( taskArray[1] );
+            localStorage.setExpectedSuccessRate(taskArray[2]);
+
+            tasks = this.getTasksByMiniGameIdAndEmotionAndChoices(miniGameId, chosenEmotion[0], taskArray[0] );
+            // return;
+
+        }
+
+        
         var unsolvedTasks = [];
 
         if (tasks.length === 0) {
@@ -82,6 +128,26 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
 
         return tasks;
     };
+
+    /**
+     * Get all Task filtered by miniGameId and emotion.
+     * @param {Integer} [miniGameId]
+     * @param {String} [emotion]
+     * @param {Integer} [numberOfChoices]
+     * @returns {Array}
+     */
+    Tasks.prototype.getTasksByMiniGameIdAndEmotionAndChoices = function(miniGameId, emotion, numberOfChoices) {
+        var tasks = [];
+        var tasksDataLength = tasksData.length;
+
+        for (var i = 0; i < tasksDataLength; i++) {
+            if (emotion == tasksData[i].emotion && miniGameId == tasksData[i].miniGameId && tasksData[i].alternatives.length >= numberOfChoices) {
+                tasks.push(tasksData[i]);
+            }
+        }
+
+        return tasks;
+    };    
 
     return new Tasks();
 });

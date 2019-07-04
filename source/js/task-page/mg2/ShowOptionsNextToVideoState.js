@@ -1,4 +1,4 @@
-define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/Animations', 'task-page/BaseTaskPageState'], function(jsb, $, Animations, BaseTaskPageState)
+define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/Animations', 'services/LocalStorage', 'task-page/BaseTaskPageState'], function(jsb, $, Animations, localStorage, BaseTaskPageState)
 {
     "use strict";
 
@@ -15,19 +15,51 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
 
         that.foxAnimation("fox-pondering");
         that.addClickPrevention();
+        
         that.playSound('question_' + that.options.level.person.salutation + '.mp3', function(){
+
             that.showOption(1, false);
             that.currentTimout = setTimeout(function()
             {
                 that.showOption(2, false);
                 that.currentTimout = setTimeout(function()
                 {
-                    that.clearClickPrevention();
                     that.showOption(3, false);
-                    that.currentTimout = setTimeout(function() {
-                        //Disable hint for the further game instruction
-                        //that.startInactivityTimer();
+                    if ( that.options.level.options.length == 3){
+                        that.clearClickPrevention();
                         setTimeout(that.options.completeCallback, 0);
+                    }
+                    that.currentTimout = setTimeout(function()
+                    {
+                        if ( that.options.level.options.length > 3) {
+                            that.showOption(4, false);
+                            if ( that.options.level.options.length == 4){
+                                that.clearClickPrevention();
+                                setTimeout(that.options.completeCallback, 0);
+                            }
+                            that.currentTimout = setTimeout(function()
+                            {
+                                if ( that.options.level.options.length > 4) {
+                                    that.showOption(5, false);
+                                    if ( that.options.level.options.length == 5){
+                                        that.clearClickPrevention();
+                                        setTimeout(that.options.completeCallback, 0);
+                                    }
+                                    that.currentTimout = setTimeout(function()
+                                    {
+                                        if ( that.options.level.options.length > 5) {
+                                            that.clearClickPrevention();
+                                            that.showOption(6, false);
+                                            that.currentTimout = setTimeout(function() {
+                                                //Disable hint for the further game instruction
+                                                //that.startInactivityTimer();
+                                                setTimeout(that.options.completeCallback, 0);
+                                            }, 2000);
+                                        }
+                                    }, 2000);
+                                }
+                            }, 2000);
+                        }
                     }, 2000);
                 }, 2000);
             }, 2000);
@@ -42,26 +74,30 @@ define('task-page/mg2/ShowOptionsNextToVideoState', ['jsb', 'jquery', 'services/
 
         clearTimeout(this.currentTimout);
         that.stopSound();
-        that.showOption(1, true);
-        that.showOption(2, true);
-        that.showOption(3, true);
+
+        for (var i = 1; i <= localStorage.getNumberOfChoicesForCurrentTask(); i++)
+            that.showOption(i, true);
+
+        // that.showOption(2, true);
+        // that.showOption(3, true);
+        // that.showOption(4, true);
+        // that.showOption(5, true);
+        // that.showOption(6, true);
     };
 
     ShowOptionsNextToVideoState.prototype.showOption = function(facePosition, withoutFadingAndSound)
     {
-        var optionSelector = '.first-option';
-        if (facePosition == 2) {
-            optionSelector = '.second-option';
-        }
-        if (facePosition == 3) {
-            optionSelector = '.third-option';
-        }
-        this.domElement.find(optionSelector).css('background-image',
+        var optionSelectors = ['.first-option', '.second-option', '.third-option','.fourth-option', '.fifth-option', '.sixth-option'];
+
+
+        this.domElement.find(optionSelectors[facePosition - 1]).css('background-image',
                 'url("img/emotion_' + this.options.level.options[facePosition - 1] + '.svg")');
+        this.domElement.find(optionSelectors[facePosition - 1]).addClass('is-used');
+
         if (withoutFadingAndSound) {
-            this.domElement.find(optionSelector).show();
+            this.domElement.find(optionSelectors[facePosition - 1]).show();
         } else {
-            this.domElement.find(optionSelector).hide().fadeIn();
+            this.domElement.find(optionSelectors[facePosition - 1]).hide().fadeIn();
             this.playSound(this.options.level.options[facePosition - 1] + '.mp3');
         }
     };

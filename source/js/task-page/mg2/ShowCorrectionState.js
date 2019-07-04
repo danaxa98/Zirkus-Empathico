@@ -10,7 +10,7 @@ define('task-page/mg2/ShowCorrectionState', ['jsb', 'jquery', 'task-page/BaseTas
         that.showElements(['.fox-animation', '.video-container', '.video', '.stage']);
 
         var correct_option = null;
-        for (var i = 1; i <= 3; i++) {
+        for (var i = 1; i <= 6; i++) {
             if (this.options.level.options[i - 1] == this.options.level.correct) {
                 correct_option = i;
             }

@@ -291,7 +291,8 @@ define('services/Levels', ['jsb', 'logging', 'data/Levels', 'services/Tasks', 's
         }
 
         //Shuffle all alternative options and get two
-        options = _.shuffle(options).slice(0, 2);
+        var numberOfChoicesForAdaptiveTraining = localStorage.getNumberOfChoicesForCurrentTask() - 1;
+        options = _.shuffle(options).slice(0, numberOfChoicesForAdaptiveTraining > 2 ? numberOfChoicesForAdaptiveTraining : 2);
         //Add the right add answer
         options.push(task.emotion);
         //shuffle again

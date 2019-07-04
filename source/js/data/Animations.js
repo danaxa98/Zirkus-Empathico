@@ -114,6 +114,45 @@ define('data/Animations', [], function()
             }
         },
         {
+            //copy of fox-laying-3
+            "name": "fox-laying-4",
+            "file": "media/sprits/fox/lying3_map.png",
+            "size": [958, 202],
+            "margin": [0, 0, 0, 0],
+            "config": {
+                columns: 2,
+                animations: {
+                    'run': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21]
+                }
+            }
+        },
+        {
+            //copy of fox-laying-3
+            "name": "fox-laying-5",
+            "file": "media/sprits/fox/lying3_map.png",
+            "size": [958, 202],
+            "margin": [0, 0, 0, 0],
+            "config": {
+                columns: 2,
+                animations: {
+                    'run': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21]
+                }
+            }
+        },
+        {
+            //copy of fox-laying-3
+            "name": "fox-laying-6",
+            "file": "media/sprits/fox/lying3_map.png",
+            "size": [958, 202],
+            "margin": [0, 0, 0, 0],
+            "config": {
+                columns: 2,
+                animations: {
+                    'run': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21]
+                }
+            }
+        },
+        {
             "name": "fox-pointing-eyes",
             "file": "media/sprits/fox/pointing_eyes_map.png",
             "size": [436, 304],

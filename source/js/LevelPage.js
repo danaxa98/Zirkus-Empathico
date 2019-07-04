@@ -4,14 +4,18 @@ define('LevelPage',
         'task-page/mg2/Controller',
         'task-page/mg3/Controller',
         'task-page/mg4/Controller',
-        'task-page/mg5/Controller'],
+        'task-page/mg5/Controller',
+        'AdaptiveSystem',
+        'store'],
     function(jsb, logging, $, _, BasePage, levels,
              localStorage,
              mg1Controller,
              mg2Controller,
              mg3Controller,
              mg4Controller,
-             mg5Controller
+             mg5Controller,
+             AdaptiveSystem,
+             store
         )
 {
     "use strict";
@@ -104,6 +108,15 @@ define('LevelPage',
         this.domElement.find('.third-option').on('click', function() {
             that.chooseFace(3, $(this));
         });
+        this.domElement.find('.fourth-option').on('click', function() {
+            that.chooseFace(4, $(this));
+        });
+        this.domElement.find('.fifth-option').on('click', function() {
+            that.chooseFace(5, $(this));
+        });
+        this.domElement.find('.sixth-option').on('click', function() {
+            that.chooseFace(6, $(this));
+        });                        
 
         this.domElement.find('.correct-option').on('click', function() {
             that.chooseCorrectFace();
@@ -162,7 +175,7 @@ define('LevelPage',
 
             var emotion = that.level.options[facePosition - 1];
 
-            var aryOption = ['.first-option', '.second-option', '.third-option'];
+            var aryOption = ['.first-option', '.second-option', '.third-option', '.fourth-option', '.fifth-option', '.sixth-option'];
             that.domElement.find(aryOption[facePosition - 1]).addClass(
                 (emotion == that.level.correct) ? 'is-correct' : 'is-incorrect');
 
@@ -212,6 +225,21 @@ define('LevelPage',
      */
     LevelPage.prototype.finish = function(successfully) {
         var that = this;
+
+        if (that.level.miniGameId == 2){
+            let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
+            localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
+            let eScores = localStorage.getEmotionScores();
+
+            for (var i = 0; i < eScores.length; i++){
+                if ( localStorage.getLastEmotionPlayed() === eScores[i][0])
+                eScores[i][1] = eScores[i][1] + eScoreChange;
+            }
+            localStorage.setEloScore( Math.round(eScores.reduce((x, y) => x+y[1], 0) / eScores.length) );
+            localStorage.setEmotionScores(eScores);
+            
+        }
+
         localStorage.setLastPlayedLevel(that.level.miniGameId, that.level.id);
         if (successfully) {
             jsb.fireEvent('Tracking::ACTIVITY', {
