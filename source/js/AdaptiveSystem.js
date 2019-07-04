@@ -113,7 +113,8 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
          */    
         function getExpectedSuccessRate(emotionScore) {
             var baseSuccessRate = computeBaseSuccessRate(emotionScore);
-            var expectedChoice = computeExpectedChoice(result[0], result[1]);
+            // var expectedChoice = computeExpectedChoice(result[0], result[1]);
+            var expectedChoice = result[0];
             var expectedSuccessRate = computeExpectedSuccessRate(baseSuccessRate, expectedChoice);
             return expectedSuccessRate;
         }
@@ -161,7 +162,7 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
                 -1 * k_value * successRate);
         var change = computeChange(result, expectedSuccessRate);
         
-        return change;
+        return Math.round(change);
     };
 
     return new AdaptiveSystem();
