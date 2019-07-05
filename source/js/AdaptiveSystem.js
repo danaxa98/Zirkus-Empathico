@@ -142,14 +142,15 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
      * @author Dan - finished implementing and preliminary testing
      * @todo Unit Testing
      * @param {Number} gamesPlayed 
-     * @param {Number} expectedSuccessRate 
+     * @param {Number} expectedSuccessRate between 0 to 1
+     * @param {Number} numberOfChoices 2-6 the number of choices that were presented to the user to calculate the CHOICES_WEIGHT = [1, 0.9, 0.8, 0.7, 0.6]; 
      * @param {boolean} result  //User result, 0 for incorrect, 1 for correct
      * @returns {Number} change in emotion score
      */
-    AdaptiveSystem.prototype.updateScores = function(gamesPlayed, expectedSuccessRate, result) {
+    AdaptiveSystem.prototype.updateScores = function(gamesPlayed, expectedSuccessRate, result, numberOfChoices) {
 
         //Compute k value
-        var computeK = (gamesPlayed) => ( 50 + 100 * Math.exp(-0.01 * gamesPlayed) ) ;  // * CHOICES_WEIGHT[NumberOfChoices-2]
+        var computeK = (gamesPlayed) => ( 50 + 100 * Math.exp(-0.01 * gamesPlayed) ) * CHOICES_WEIGHT[numberOfChoices-2] ;
         var k_value = computeK(gamesPlayed);
 
         

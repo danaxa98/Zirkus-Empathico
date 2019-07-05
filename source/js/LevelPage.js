@@ -228,16 +228,16 @@ define('LevelPage',
 
             clearTimeout(localStorage.getCurrentTimerID() );
 
-            if ( localStorage.isCurrentTimeConstraintAchieved() == false )
+            if ( localStorage.isCurrentTimeConstraintAchieved() === false )
                 successfully = false;
 
-            let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
+            var eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0, localStorage.getNumberOfChoicesForCurrentTask() );
 
             localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
 
             localStorage.setCurrentScoreChange(eScoreChange);
 
-            let eScores = localStorage.getEmotionScores();
+            var eScores = localStorage.getEmotionScores();
 
             for (var i = 0; i < eScores.length; i++){
                 if ( localStorage.getLastEmotionPlayed() === eScores[i][0])

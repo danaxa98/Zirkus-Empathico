@@ -3,6 +3,8 @@ define('app', ['Backbone', 'jsb', 'logging', 'jquery', 'services/LocalStorage', 
 {
     "use strict";
 
+    //checks if the user is authenticated
+    // if not redirects to login page
     Authenticated.isAuthenticated();
 
     var App = function() {

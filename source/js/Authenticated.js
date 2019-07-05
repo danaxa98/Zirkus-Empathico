@@ -1,4 +1,4 @@
-define('Authenticated', ['jquery'], function($)
+define('Authenticated', ['jquery', 'services/LocalStorage'], function($, localStorage)
 {
     "use strict";
 
@@ -15,19 +15,19 @@ define('Authenticated', ['jquery'], function($)
             cache: false,
             success: function(result)
             {
-                if(result==null || result.status==false)
+                if(result == null || result.status === false)
                 {
                     
-                    window.location.href="/PhpSemesterproject/LoginView.php"
+                    window.location.href = "/PhpSemesterproject/LoginView.php";
                 }
-                else if ( result.status == true){
-                    localStorage.setUsername(result.Username);
+                else if ( result.status === true){
+                    localStorage.setUserName(result.Username);
                 }
             },
             error: function(result){
                 console.log('Cant Login. Error: ');
                 console.log(result);
-                window.location.href="/PhpSemesterproject/LoginView.php"
+                window.location.href = "/PhpSemesterproject/LoginView.php";
             }
         });
     };
@@ -43,10 +43,9 @@ define('Authenticated', ['jquery'], function($)
             success: function(result)
             {
 
-                if(result.status == true)
+                if(result.status === true)
                 {
-                    
-                    window.location.href="/PhpSemesterproject/LoginView.php"
+                    window.location.href = "/PhpSemesterproject/LoginView.php";
                 }
                 else{
                     console.log('Cant logout. Error: ');
@@ -59,7 +58,7 @@ define('Authenticated', ['jquery'], function($)
                 //window.location.href="/PhpSemesterproject/LoginView.php"
             }
         });
-    }
+    };
 
     return new Authenticated();
 
