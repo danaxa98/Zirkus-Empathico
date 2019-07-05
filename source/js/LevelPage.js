@@ -244,7 +244,7 @@ define('LevelPage',
                 eScores[i][1] = eScores[i][1] + eScoreChange;
             }
 
-            localStorage.setEloScore( Math.round(eScores.reduce((x, y) => x+y[1], 0) / eScores.length) );
+            localStorage.setEloScore( eScores.reduce((x, y) => x+y[1], 0) / eScores.length);
             localStorage.setEmotionScores(eScores);
             
         }

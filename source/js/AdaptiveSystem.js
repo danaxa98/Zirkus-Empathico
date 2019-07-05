@@ -13,15 +13,13 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
         SURPRISED: "surprised"
     };
 
-    var eArray = [[emotion.ANGRY, 3200], [emotion.ANXIOUS, 3400], [emotion.JOYFUL, 3650], 
-        [emotion.NEUTRAL, 3100], [emotion.SAD, 3200], [emotion.SURPRISED, 3300]];
-    let elo = Math.round(eArray.reduce((x, y) => x+y[1], 0) / eArray.length);
     const DISTRIBUTE_WEIGHT = [0.2, 0.4, 0.58, 0.74, 0.88, 1];
+    const CHOICES_WEIGHT = [1, 0.9, 0.8, 0.7, 0.6]; 
     const DELTA_N = 0.1;
     const WANTED_CHANCE = 0.70;
     const WANTED_BASE_CHANCES = [2, 3, 4, 5, 6].map(n => (WANTED_CHANCE*n-1)/(n-1));
-    const LAMBDA = 1/3;
-    const TIME_MIDDLE = 20;
+    const LAMBDA = 1/2;
+    const TIME_MIDDLE = 10;
     const TIME_ADJUST = 0;
     const ELO_SCALE = 9000;
     const ELO_STEEPNESS = 0.003;
@@ -134,7 +132,7 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
                 timeConstraint = -TIME_ADJUST + 1/LAMBDA * 
                     Math.log(wanted_base_chance * Math.exp(LAMBDA*TIME_MIDDLE) / (baseSuccessRate - wanted_base_chance));
             }
-            return timeConstraint;
+            return Math.min(timeConstraint, MAX_TIME);
         }
         
         return result;
@@ -151,7 +149,7 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
     AdaptiveSystem.prototype.updateScores = function(gamesPlayed, expectedSuccessRate, result) {
 
         //Compute k value
-        var computeK = (gamesPlayed) => 10 + 40 * Math.exp(-0.05 * gamesPlayed);
+        var computeK = (gamesPlayed) => ( 50 + 100 * Math.exp(-0.01 * gamesPlayed) ) ;  // * CHOICES_WEIGHT[NumberOfChoices-2]
         var k_value = computeK(gamesPlayed);
 
         
@@ -162,7 +160,7 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
                 -1 * k_value * successRate);
         var change = computeChange(result, expectedSuccessRate);
         
-        return Math.round(change);
+        return change;
     };
 
     return new AdaptiveSystem();
