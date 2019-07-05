@@ -1,5 +1,5 @@
-define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage', 'store', 'Authenticated'],
-    function(jsb, logging, $, BasePage, localStorage, store, Authenticated)
+define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage', 'services/UserProfile'],
+    function(jsb, logging, $, BasePage, localStorage, UserProfile)
 {
     "use strict";
 
@@ -115,7 +115,7 @@ define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStor
             //event.stopPropagation();
             //that.startInactivityTimer();
             //var el = $(this);
-            Authenticated.logout();
+            UserProfile.logout();
             //var miniGameId = el.attr('data-minigameid');
             //that.onClickElement(el, miniGameId);
             //that.startInactivityTimer();

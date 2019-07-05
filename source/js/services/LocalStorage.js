@@ -1,6 +1,6 @@
 define('services/LocalStorage',
-    ['logging', 'store', 'uuid'],
-    function(logging, store, uuid)
+    ['logging', 'store', 'uuid', 'services/UserProfile'],
+    function(logging, store, uuid, UserProfile)
 {
     "use strict";
     /**
@@ -623,7 +623,31 @@ define('services/LocalStorage',
      */
     LocalStorage.prototype.setUserName = function(username) {
         return store.set('_ADAPTIVE_Username', username);
+    };
+
+    /**
+     *
+     * @returns {boolean} true if the user was allready once redirected to index.html, false else
+     */
+    LocalStorage.prototype.wasRedirected = function() {
+        return store.get('_ADAPTIVE_wasRedirected');
+    };
+
+    /**
+     * 
+     * @param {boolean} wasRedirected   the username
+     */
+    LocalStorage.prototype.setWasRedirected = function(wasRedirected) {
+        return store.set('_ADAPTIVE_wasRedirected', wasRedirected);
     };    
+
+    /**
+     *
+     * deletes everything in the storage
+     */
+    LocalStorage.prototype.clearStorage = function() {
+        return store.clear();
+    };
 
     return new LocalStorage();
 });

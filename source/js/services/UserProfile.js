@@ -1,10 +1,10 @@
-define('Authenticated', ['jquery', 'services/LocalStorage'], function($, localStorage)
+define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, localStorage)
 {
     "use strict";
 
-    var Authenticated = function(){};
+    var UserProfile = function(){};
 
-    Authenticated.prototype.isAuthenticated = function()
+    UserProfile.prototype.isAuthenticated = function()
     {
 
         $.ajax({
@@ -18,21 +18,27 @@ define('Authenticated', ['jquery', 'services/LocalStorage'], function($, localSt
                 if(result == null || result.status === false)
                 {
                     
-                    window.location.href = "/PhpSemesterproject/LoginView.php";
+                    document.location = "/PhpSemesterproject/LoginView.php";
                 }
                 else if ( result.status === true){
-                    localStorage.setUserName(result.Username);
+                    localStorage.setUserName(result.username);
+
+                    if ( localStorage.isPlayIntro() && !localStorage.wasRedirected() ){
+                        console.log(document.location);
+                        localStorage.setWasRedirected(true);
+                        document.location = "/index.html";
+                    }
                 }
             },
             error: function(result){
                 console.log('Cant Login. Error: ');
                 console.log(result);
-                window.location.href = "/PhpSemesterproject/LoginView.php";
+                document.location = "/PhpSemesterproject/LoginView.php";
             }
         });
     };
 
-    Authenticated.prototype.logout = function()
+    UserProfile.prototype.logout = function()
     { 
         $.ajax({
             url: "/PhpSemesterproject/index.php?function=logout",
@@ -45,17 +51,17 @@ define('Authenticated', ['jquery', 'services/LocalStorage'], function($, localSt
 
                 if(result.status === true)
                 {
-                    window.location.href = "/PhpSemesterproject/LoginView.php";
+                    localStorage.clearStorage();
+                    document.location = "/PhpSemesterproject/LoginView.php";
                 }
                 else{
-                    console.log('Cant logout. Error: ');
+                    console.log('Cant logout. returned result was: ');
                     console.log(result);
                 }
             },
             error: function(result){
                 console.log('Cant logout. Error: ');
                 console.log(result);
-                //window.location.href="/PhpSemesterproject/LoginView.php"
             }
         });
     };
