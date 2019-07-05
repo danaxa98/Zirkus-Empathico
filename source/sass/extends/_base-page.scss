@@ -15,4 +15,13 @@
     -webkit-user-select: none !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
+
+  button#button-logout{
+    position: absolute;
+    right: 120px;
+    border: 1px solid;
+    height: 40px;
+    width: 40px;
+    top: 60px;
+  }
 }

@@ -607,7 +607,23 @@ define('services/LocalStorage',
      */
     LocalStorage.prototype.setCurrentScoreChange = function(number) {
         return store.set('_ADAPTIVE_currentScoreChange', number);
-    };     
+    }; 
+    
+    /**
+     *
+     * @returns {String} username
+     */
+    LocalStorage.prototype.getUserName = function() {
+        return store.get('_ADAPTIVE_Username') || '';
+    };
+
+    /**
+     * 
+     * @param {String} username   the username
+     */
+    LocalStorage.prototype.setUserName = function(username) {
+        return store.set('_ADAPTIVE_Username', username);
+    };    
 
     return new LocalStorage();
 });

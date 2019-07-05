@@ -1,7 +1,9 @@
-define('app', ['Backbone', 'jsb', 'logging', 'jquery', 'services/LocalStorage', 'services/Levels'],
-    function(Backbone, jsb, logging, $, localStorage, level)
+define('app', ['Backbone', 'jsb', 'logging', 'jquery', 'services/LocalStorage', 'services/Levels', 'Authenticated'],
+    function(Backbone, jsb, logging, $, localStorage, level, Authenticated)
 {
     "use strict";
+
+    Authenticated.isAuthenticated();
 
     var App = function() {
         var that = this;

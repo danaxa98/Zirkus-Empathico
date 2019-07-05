@@ -231,10 +231,9 @@ define('LevelPage',
             if ( localStorage.isCurrentTimeConstraintAchieved() == false )
                 successfully = false;
 
-            localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
-
             let eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0 );
 
+            localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
 
             localStorage.setCurrentScoreChange(eScoreChange);
 
