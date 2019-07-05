@@ -1,6 +1,6 @@
 define('services/LocalStorage',
-    ['logging', 'store', 'uuid', 'services/UserProfile'],
-    function(logging, store, uuid, UserProfile)
+    ['logging', 'store', 'uuid'],
+    function(logging, store, uuid)
 {
     "use strict";
     /**
@@ -368,7 +368,7 @@ define('services/LocalStorage',
      * @returns {boolean}
      */
     LocalStorage.prototype.isPlayIntro = function() {
-        var lastPauseTime = parseInt(store.get('cordova-last-pause') || (new Date()).getTime());
+        var lastPauseTime = parseInt( store.get('cordova-last-pause') || 0 );
         // 172.800 seconds <=> 2 days
         // 60 * 60 * 2 = 7.200 seconds <=> 2 hours
         return ((new Date()).getTime() - lastPauseTime) / 1000 > 7200;
@@ -630,7 +630,7 @@ define('services/LocalStorage',
      * @returns {boolean} true if the user was allready once redirected to index.html, false else
      */
     LocalStorage.prototype.wasRedirected = function() {
-        return store.get('_ADAPTIVE_wasRedirected');
+        return store.get('_ADAPTIVE_wasRedirected') || false;
     };
 
     /**

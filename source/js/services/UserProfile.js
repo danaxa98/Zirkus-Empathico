@@ -8,7 +8,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
     {
 
         $.ajax({
-            url: "/PhpSemesterproject/index.php?function=isAuthenticated",
+            url: "/user-profile/index.php?function=isAuthenticated",
             type: "POST",
 
             contentType:'application/x-www-form-urlencoded',
@@ -18,10 +18,15 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
                 if(result == null || result.status === false)
                 {
                     
-                    document.location = "/PhpSemesterproject/LoginView.php";
+                    document.location = "/user-profile/LoginView.php";
                 }
                 else if ( result.status === true){
+
                     localStorage.setUserName(result.username);
+
+                    console.log('WHAT ABOUT REDIRECT??');
+                    console.log(localStorage.isPlayIntro());
+                    console.log(localStorage.wasRedirected());
 
                     if ( localStorage.isPlayIntro() && !localStorage.wasRedirected() ){
                         console.log(document.location);
@@ -33,7 +38,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
             error: function(result){
                 console.log('Cant Login. Error: ');
                 console.log(result);
-                document.location = "/PhpSemesterproject/LoginView.php";
+                document.location = "/user-profile/LoginView.php";
             }
         });
     };
@@ -41,7 +46,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
     UserProfile.prototype.logout = function()
     { 
         $.ajax({
-            url: "/PhpSemesterproject/index.php?function=logout",
+            url: "/user-profile/index.php?function=logout",
             type: "POST",
 
             contentType:'application/x-www-form-urlencoded',
@@ -52,7 +57,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
                 if(result.status === true)
                 {
                     localStorage.clearStorage();
-                    document.location = "/PhpSemesterproject/LoginView.php";
+                    document.location = "/user-profile/LoginView.php";
                 }
                 else{
                     console.log('Cant logout. returned result was: ');
@@ -66,7 +71,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage'], function($, 
         });
     };
 
-    return new Authenticated();
+    return new UserProfile();
 
 });
 
