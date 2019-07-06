@@ -98,7 +98,7 @@ class DataLayer
 				return NULL;
             //print ("Conn error ($con->connect_errno): $con->connect_error");
         } else {
-            $comand = $con->prepare("SELECT JsonString FROM minigame_progress WHERE Username = ?)");
+            $comand = $con->prepare("SELECT JsonString FROM minigame_progress WHERE Username = ?");
             $comand->bind_param('s', $Username); 
             $res=$comand->execute();
             $JsonString = NULL;
