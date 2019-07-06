@@ -649,5 +649,24 @@ define('services/LocalStorage',
         return store.clear();
     };
 
+    /**
+     *
+     * deletes everything related to AdaptiveSystem in the storage
+     */
+    LocalStorage.prototype.clearAdaptiveStorage = function() {
+        store.remove('_ADAPTIVE_wasRedirected');
+        store.remove('_ADAPTIVE_Username');
+        store.remove('_ADAPTIVE_currentScoreChange');
+        store.remove('_ADAPTIVE_timerConstraintAchieved');
+        store.remove('_ADAPTIVE_timerID');
+        store.remove('_ADAPTIVE_timeConstraint');
+        store.remove('_ADAPTIVE_userScore');
+        store.remove('_ADAPTIVE_expectedSuccessRate');
+        store.remove('_ADAPTIVE_gamesPlayed');
+        store.remove('_ADAPTIVE_emotionScores');
+        store.remove('_ADAPTIVE_numberOfChoices');
+        store.remove('_ADAPTIVE_emotionPlayed');
+    };    
+
     return new LocalStorage();
 });

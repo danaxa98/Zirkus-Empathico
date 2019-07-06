@@ -1,6 +1,6 @@
 define('BasePage', ['jsb', 'logging', 'jquery', 'underscore', 'services/media',
-        'services/Animations', 'services/LocalStorage'],
-    function(jsb, logging, $, _, mediaService, Animations, localStorage)
+        'services/Animations', 'services/LocalStorage', 'services/UserProfile'],
+    function(jsb, logging, $, _, mediaService, Animations, localStorage, userProfile)
 {
     "use strict";
 
@@ -79,6 +79,11 @@ define('BasePage', ['jsb', 'logging', 'jquery', 'underscore', 'services/media',
             'id': this.options.id,
             'path': this.options.path
         });
+
+        that.domElement.find('#button-logout').click(function(event){
+            userProfile.logout();
+        }); 
+
     };
 
     BasePage.prototype.playVideo = function(fileName) {

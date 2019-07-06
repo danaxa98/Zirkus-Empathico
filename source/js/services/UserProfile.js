@@ -107,7 +107,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
 
                 if(result.status === true)
                 {
-                    localStorage.clearStorage();
+                    
                     document.location = "/user-profile/LoginView.php";
                 }
                 else{
@@ -118,7 +118,12 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
             error: function(result){
                 console.log('Cant logout. Error: ');
                 console.log(result);
+            },
+            complete: function(){
+                console.log('clearing Local Storage now');
+                localStorage.clearStorage();
             }
+
         });
 
 
@@ -170,6 +175,10 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
     {
 
         var that = this;
+        var tempStorageJson = store.serialize( store.getAll() );
+
+        //we dont want to save our adaptive temporary stats in the db
+        localStorage.clearAdaptiveStorage();
 
         $.ajax({
             url: "/user-profile/index.php?function=updateLevelProgress",
@@ -179,7 +188,7 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
             async: false,
 
             data:{
-                "Username": that.userName, //enter username
+                "Username": that.userName,
                 "JsonString": store.serialize( store.getAll() )
                 },
 
@@ -199,6 +208,13 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
                 throw(errorThrown);
             }
         });
+
+        //rebuild original store (with adaptive stats)
+        var tempStoreObject = store.deserialize(tempStorageJson);
+        for (var key in tempStoreObject) {
+            store.set(key, tempStoreObject[key]);
+        }
+
     };
 
     UserProfile.prototype.getGamesPlayed = function()

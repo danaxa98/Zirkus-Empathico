@@ -1,5 +1,5 @@
-define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage', 'services/UserProfile'],
-    function(jsb, logging, $, BasePage, localStorage, UserProfile)
+define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage'],
+    function(jsb, logging, $, BasePage, localStorage)
 {
     "use strict";
 
@@ -14,8 +14,8 @@ define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStor
 				"objectType": "user"
 			},
 			"verb": "enter-homescreen"
-		});
-
+        });
+        
         if (localStorage.isGameFinished()){
             that.domElement.addClass('game-is-finished');
             that.initEventListener();
@@ -110,17 +110,6 @@ define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStor
             that.startInactivityTimer();
 
         });
-
-        that.domElement.find('#button-logout').click(function(event){
-            //event.stopPropagation();
-            //that.startInactivityTimer();
-            //var el = $(this);
-            UserProfile.logout();
-            //var miniGameId = el.attr('data-minigameid');
-            //that.onClickElement(el, miniGameId);
-            //that.startInactivityTimer();
-
-        });        
 
         that.domElement.find('.goto-library-chooser').click(function(event){
             event.stopPropagation();

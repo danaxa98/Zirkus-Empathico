@@ -930,20 +930,26 @@ class DataLayer
 	*/
     function retrieveData($Username){
         $DBData["Username"] = $Username;
-        $DBData["Timestamp"] = $this->retrieveTimestamp($Username);
+
+        //häääh? warum nur ein Timestamp? Timestamp wovon? jeder score könnte einen anderen Timestamp haben. abgesehen davon brauch ich den überhaupt nicht
+        //$DBData["Timestamp"] = $this->retrieveTimestamp($Username);
         $DBData["ELO"] = $this->retrieveELO($Username);
-        $DBData["KVAL"] = $this->retrieveKval($Username);
+
+        // not used
+        //$DBData["KVAL"] = $this->retrieveKval($Username);
         $DBData["ANGRY"] = $this->retrieveAngry($Username);
         $DBData["ANXIOUS"] = $this->retrieveAnxious($Username);
         $DBData["JOYFUL"] = $this->retrieveJoyful($Username);
         $DBData["NEUTRAL"] = $this->retrieveNeutral($Username);
         $DBData["SAD"] = $this->retrieveSad($Username);
         $DBData["SURPRISED"] = $this->retrieveSurprised($Username);
-        foreach($DBData as $key => $DBEntry){
-            if($DBEntry == NULL){
-                return NULL;
-            }
-        }
+
+        // häääh?? wenn nur ein eintrag NULL ist krieg ich gar nichts???
+        // foreach($DBData as $key => $DBEntry){
+        //     if($DBEntry == NULL){
+        //         return NULL;
+        //     }
+        // }
         return $DBData;
     }
 	/*
