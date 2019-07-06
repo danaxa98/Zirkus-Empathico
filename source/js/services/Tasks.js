@@ -120,7 +120,7 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
         var tasksDataLength = tasksData.length;
 
         for (var i = 0; i < tasksDataLength; i++) {
-            if (emotion == tasksData[i].emotion && miniGameId == tasksData[i].miniGameId && tasksData[i].alternatives.length >= numberOfChoices) {
+            if (emotion == tasksData[i].emotion && miniGameId == tasksData[i].miniGameId && tasksData[i].alternatives.length >= numberOfChoices - 1) {
                 tasks.push(tasksData[i]);
             }
         }
