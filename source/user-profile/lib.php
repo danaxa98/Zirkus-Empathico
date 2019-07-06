@@ -473,7 +473,7 @@ class DataLayer
                                      INSERT INTO surprised_score(Username, Timestamp, SURPRISED)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Surprised); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Surprised); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -509,7 +509,7 @@ class DataLayer
                                      INSERT INTO sad_score(Username, Timestamp, SAD)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Sad); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Sad); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -544,7 +544,7 @@ class DataLayer
                                      INSERT INTO neutral_score(Username, Timestamp, NEUTRAL)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Neutral); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Neutral); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -579,7 +579,7 @@ class DataLayer
                                      INSERT INTO joyful_score(Username, Timestamp, JOYFUL)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Joyful); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Joyful); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -614,7 +614,7 @@ class DataLayer
                                      INSERT INTO anxious_score(Username, Timestamp, ANXIOUS)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Anxious); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Anxious); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -649,7 +649,7 @@ class DataLayer
                                      INSERT INTO angry_score(Username, Timestamp, ANGRY)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Angry); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Angry); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
@@ -719,7 +719,7 @@ class DataLayer
                                      INSERT INTO elo_score(Username, Timestamp, ELO)
                                      VALUES(?, ?, ?)
                                      ");
-            $comand->bind_param('sii',$Username,$Timestamp,$Eloscore); 
+            $comand->bind_param('sid',$Username,$Timestamp,$Eloscore); 
             $res=$comand->execute();
             if($res){
                 $comand->close();
