@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .bg { 
   /* The image used */
-  background-image: url("/PhpSemesterproject/Images/PassChangeRequest.png");
+  background-image: url("/user-profile/Images/PassChangeRequest.png");
 
   /* Full height */
   height: 100%; 
@@ -94,9 +94,9 @@ input{
         
          <div style="text-align:center;margin-top:3%">
              <button type="button"  class="buttonStyle"  onclick="SendRequest()">
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
                  <span class="spanInButton">Send Request </span>
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
        </div>
@@ -114,7 +114,7 @@ input{
       
       
     $.ajax({
-      url: "/PhpSemesterproject/index.php?function=PasswordResetRequest",
+      url: "/user-profile/index.php?function=PasswordResetRequest",
                         type: "POST",
 
                         contentType:'application/x-www-form-urlencoded',

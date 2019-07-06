@@ -5,7 +5,8 @@ define('LevelPage',
         'task-page/mg3/Controller',
         'task-page/mg4/Controller',
         'task-page/mg5/Controller',
-        'AdaptiveSystem'],
+        'AdaptiveSystem',
+        'services/UserProfile'],
     function(jsb, logging, $, _, BasePage, levels,
              localStorage,
              mg1Controller,
@@ -13,7 +14,8 @@ define('LevelPage',
              mg3Controller,
              mg4Controller,
              mg5Controller,
-             AdaptiveSystem
+             AdaptiveSystem,
+             userProfile
         )
 {
     "use strict";
@@ -231,21 +233,14 @@ define('LevelPage',
             if ( localStorage.isCurrentTimeConstraintAchieved() === false )
                 successfully = false;
 
-            var eScoreChange = AdaptiveSystem.updateScores( localStorage.getNumberOfGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0, localStorage.getNumberOfChoicesForCurrentTask() );
+            var eScoreChange = AdaptiveSystem.updateScores( userProfile.getGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0, localStorage.getNumberOfChoicesForCurrentTask() );
 
-            localStorage.setNumberOfGamesPlayed( localStorage.getNumberOfGamesPlayed() + 1 );
+            userProfile.incrementGamesPlayed();
 
             localStorage.setCurrentScoreChange(eScoreChange);
+            localStorage.setCurrentScoreChange(eScoreChange);
 
-            var eScores = localStorage.getEmotionScores();
-
-            for (var i = 0; i < eScores.length; i++){
-                if ( localStorage.getLastEmotionPlayed() === eScores[i][0])
-                eScores[i][1] = eScores[i][1] + eScoreChange;
-            }
-
-            localStorage.setEloScore( eScores.reduce((x, y) => x+y[1], 0) / eScores.length);
-            localStorage.setEmotionScores(eScores);
+            userProfile.updateUserEmotionScore(localStorage.getLastEmotionPlayed(), eScoreChange);
             
         }
 

@@ -355,7 +355,7 @@
 ////<body>
 ////
 ////<div>
-////        <p>Please click the following link to proceed to the password reset "<a href ="https://dev.zirkus-empathico.de/PhpSemesterproject/PassChangeReguestView.php?Guid="'+$Guid+'>Password Reset</a>"</p>
+////        <p>Please click the following link to proceed to the password reset "<a href ="https://dev.zirkus-empathico.de/user-profile/PassChangeReguestView.php?Guid="'+$Guid+'>Password Reset</a>"</p>
 ////
 ////
 ////</div>
@@ -380,7 +380,7 @@
      
      $message = '<html><body>';
 $message .= '<h4 style="color:#f40;">Please click the following link to proceed to the password reset!</h4>';
-$message .= '<a href="https://dev.zirkus-empathico.de/PhpSemesterproject/PasswordReset.php?Guid='.$Guid.'">Password Reset</a></p>';
+$message .= '<a href="https://dev.zirkus-empathico.de/user-profile/PasswordReset.php?Guid='.$Guid.'">Password Reset</a></p>';
 $message .= '</body></html>';
     mail($to,$subject,$message, $headers);
      }

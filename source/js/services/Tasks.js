@@ -12,8 +12,8 @@
  * @property {String} excludePerson - A list of person who not be selected as face video
  * like 'context_NAME_EXTENTION.mp4'.
  */
-define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks', 'AdaptiveSystem'],
-    function(jsb, logging, localStorage, tasksData, AdaptiveSystem)
+define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks', 'AdaptiveSystem', 'services/UserProfile'],
+    function(jsb, logging, localStorage, tasksData, AdaptiveSystem, userProfile)
 {
     "use strict";
 
@@ -33,9 +33,9 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
 
         if (miniGameId === 2){
 
-            var chosenEmotion = AdaptiveSystem.chooseEmotion( localStorage.getEmotionScores() );
+            var chosenEmotion = AdaptiveSystem.chooseEmotion( userProfile.getUserEmotionScores() );
 
-            var taskConstraints = AdaptiveSystem.generateTask(chosenEmotion[0], chosenEmotion[1], localStorage.getEloScore() );
+            var taskConstraints = AdaptiveSystem.generateTask(chosenEmotion[0], chosenEmotion[1], userProfile.getUserEloScore() );
             
             localStorage.setLastEmotionPlayed(chosenEmotion[0]);
             localStorage.setNumberOfChoicesForCurrentTask(taskConstraints[0]);

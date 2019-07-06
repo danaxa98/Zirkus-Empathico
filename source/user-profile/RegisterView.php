@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .bg { 
   /* The image used */
-  background-image: url("/PhpSemesterproject/Images/register1.png");
+  background-image: url("/user-profile/Images/register1.png");
 
   /* Full height */
   height: 100%; 
@@ -99,7 +99,7 @@ input{
         </div>
         <div style="text-align:center;height: 50px">
                 <div class="hide" id="UsernameAlert">
-            <img src="/PhpSemesterproject/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
+            <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
             <div class="AlertTextStyle" ><b id="UsernameAlertMessage">The username already exists please choose another name</b></div>
                 </div>
@@ -113,7 +113,7 @@ input{
         </div>
              <div style="text-align:center;height: 70px">
                  <div class="hide" id="PasswordAlert">
-            <img src="/PhpSemesterproject/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
+            <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
             <div class="AlertTextStyle" ><b id="PasswordAlertMessage">Your password and confirmation password do not match.</b></div>
         </div>
@@ -123,21 +123,21 @@ input{
         </div>
              <div style="text-align:center;height: 60px">
                 <div class="hide" id="EmailAlert">
-            <img src="/PhpSemesterproject/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
+            <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
             <div class="AlertTextStyle" ><b>Wrong Email format.</b></div>
         </div>
           </div>
          <div style="text-align:center">
              <button type="button"  class="buttonStyle" onclick="Register()">
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
                  <span class="spanInButton">Submit </span>
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
     </body>
 </html>
- <script src="/PhpSemesterproject/Js/SHA.js"></script>
+ <script src="/user-profile/Js/SHA.js"></script>
 <script>
     
     var Register=function(){
@@ -215,7 +215,7 @@ input{
   hashObj.update(pass);
   var HashPass = hashObj.getHash("HEX");
     $.ajax({
-      url: "/PhpSemesterproject/index.php?function=register",
+      url: "/user-profile/index.php?function=register",
                         type: "POST",
 
                         contentType:'application/x-www-form-urlencoded',
@@ -232,7 +232,7 @@ input{
                            
                       if(result!=null && result.status==true)
                       {
-                       window.location.href="/PhpSemesterproject/LoginView.php"
+                       window.location.href="/user-profile/LoginView.php"
                     }
                    else{
                       var UsernameAlert= $("#UsernameAlert");

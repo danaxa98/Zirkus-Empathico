@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .bg { 
   /* The image used */
-  background-image: url("/PhpSemesterproject/Images/login.png");
+  background-image: url("/user-profile/Images/login.png");
 
   /* Full height */
   height: 100%; 
@@ -27,7 +27,7 @@ and open the template in the editor.
 
 .bgSuccessfull {
     /* The image used */
-  background-image: url("/PhpSemesterproject/Images/LoginSuccessful.png");
+  background-image: url("/user-profile/Images/LoginSuccessful.png");
 
   /* Full height */
   height: 100%; 
@@ -40,7 +40,7 @@ and open the template in the editor.
 
 .bgAlert {
     /* The image used */
-  background-image: url("/PhpSemesterproject/Images/Login2.png");
+  background-image: url("/user-profile/Images/Login2.png");
 
   /* Full height */
   height: 100%; 
@@ -117,20 +117,20 @@ input{
         </div>
     
     <div style="text-align:center;margin-top:1%">
-        <a style="margin-left:-5%;margin-right: 10px" href="/PhpSemesterproject/PassChangeReguestView.php">Forgot Password?</a><a href="/PhpSemesterproject/RegisterView.php">Register</a>
+        <a style="margin-left:-5%;margin-right: 10px" href="/user-profile/PassChangeReguestView.php">Forgot Password?</a><a href="/user-profile/RegisterView.php">Register</a>
         </div>
         
          <div style="text-align:center;margin-top:1%">
              <button type="button"  class="buttonStyle" value="Submit" onclick="login()">
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
                  <span class="spanInButton">Submit </span>
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
     
     </body>
 </html>
-<script src="/PhpSemesterproject/Js/SHA.js"></script>
+<script src="/user-profile/Js/SHA.js"></script>
 <script>
     
     var login=function(){
@@ -146,7 +146,7 @@ input{
   var HashPass = hashObj.getHash("HEX");
   
     $.ajax({
-      url: "/PhpSemesterproject/index.php?function=login",
+      url: "/user-profile/index.php?function=login",
                         type: "POST",
 
                         contentType:'application/x-www-form-urlencoded',

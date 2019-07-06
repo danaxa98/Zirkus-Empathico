@@ -24,17 +24,12 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
     const ELO_SCALE = 9000;
     const ELO_STEEPNESS = 0.003;
     const NEEDED_SCORES = WANTED_BASE_CHANCES.map(x => 1/ELO_STEEPNESS * Math.log((ELO_SCALE*x)/(1-x)));
-    const MAX_TIME = 20;    
+    const MAX_TIME = 20;
 
 
-    var AdaptiveSystem = function(){
-
-
-
-        //simple example
-        // let chosen_emotion = chooseEmotion(eArray);
-        // let task = generateTask(chosen_emotion[0], chosen_emotion[1], elo);
-        // console.log(updateScores(1, task[2], 0));
+    var AdaptiveSystem = function()
+    {
+        this.startingEmotionScores = [['angry', 3120], ['anxious', 3120], ['joyful', 3120], ['neutral', 3120], ['sad', 3120], ['surprised', 3120]];
     };
 
 
@@ -164,5 +159,9 @@ define('AdaptiveSystem', ['jsb', 'logging', 'jquery', 'services/LocalStorage', '
         return change;
     };
 
+    AdaptiveSystem.prototype.calculateEloScore = function(emotionScores)
+    {
+        return emotionScores.reduce((x, y) => x+y[1], 0) / emotionScores.length
+    }
     return new AdaptiveSystem();
 });

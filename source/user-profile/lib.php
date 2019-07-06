@@ -815,28 +815,28 @@ class DataLayer
                 //print ("Unknown error");
             }
             if($success){
-             $success=$this->insertELO($Username, $Unixtime, 1000);   
+             $success=$this->insertELO($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertKval($Username, $Unixtime, 1);   
+             $success=$this->insertKval($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertAngry($Username, $Unixtime, 1000);   
+             $success=$this->insertAngry($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertAnxious($Username, $Unixtime, 1000);   
+             $success=$this->insertAnxious($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertJoyful($Username, $Unixtime, 1000);   
+             $success=$this->insertJoyful($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertNeutral($Username, $Unixtime, 1000);   
+             $success=$this->insertNeutral($Username, $Unixtime, NULL);
             }
             if($success){
-             $success=$this->insertSad($Username, $Unixtime, 1000);   
+             $success=$this->insertSad($Username, $Unixtime, NULL);   
             }
             if($success){
-             $success=$this->insertSurprised($Username, $Unixtime, 1000);   
+             $success=$this->insertSurprised($Username, $Unixtime, NULL);   
             }
             if($success){
              $success=$this->insertLevelProgress($Username, NULL);   

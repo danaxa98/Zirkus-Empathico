@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .bg { 
   /* The image used */
-  background-image: url("/PhpSemesterproject/Images/PassReset.png");
+  background-image: url("/user-profile/Images/PassReset.png");
 
   /* Full height */
   height: 100%; 
@@ -113,7 +113,7 @@ input{
         </div>
              <div style="text-align:center;height: 70px">
             <div class="hide">
-            <img src="/PhpSemesterproject/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
+            <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
             <div class="AlertTextStyle" ><b>Your password and confirmation password do not match.</b></div>
         </div>
@@ -121,9 +121,9 @@ input{
         
          <div style="text-align:center">
              <button type="button"  class="buttonStyle" value="Submit">
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
                  <span class="spanInButton">Submit </span>
-                 <img src="/PhpSemesterproject/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
+                 <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
     </body>

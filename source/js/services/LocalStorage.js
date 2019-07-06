@@ -486,7 +486,7 @@ define('services/LocalStorage',
      * @returns {Array} an array of emotion (string) and score (float) 
      */
     LocalStorage.prototype.getEmotionScores = function() {
-        return store.get('_ADAPTIVE_emotionScores') || [['angry', 3120], ['anxious', 3120], ['joyful', 3120], ['neutral', 3120], ['sad', 3120], ['surprised', 3120]];
+        return store.get('_ADAPTIVE_emotionScores') || false;
     };
 
     /**
@@ -534,7 +534,7 @@ define('services/LocalStorage',
      * @returns {Float} get the user elo score
      */
     LocalStorage.prototype.getEloScore = function() {
-        return store.get('_ADAPTIVE_userScore') || Math.round(this.getEmotionScores().reduce((x, y) => x+y[1], 0) / this.getEmotionScores().length);
+        return store.get('_ADAPTIVE_userScore') || false;
     };
 
     /**
