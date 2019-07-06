@@ -7,6 +7,12 @@ class DataLayer
     const db_pass = "empathie100%";
     const db_databaseName = "zirkusem_trainingv2_dev";
     
+    
+//    const db_host = "localhost";
+//    const db_username = "root";
+//    const db_pass = "";
+//    const db_databaseName = "zirkusempaticonew";
+    
     /*
      * Updates the JSON entry of a user in the minigame progress table
      * @Input
@@ -922,7 +928,7 @@ class DataLayer
 	@return
 	An array with the values as described in pushData, or NULL on error.
 	*/
-    function retrieveDatSa($Username){
+    function retrieveData($Username){
         $DBData["Username"] = $Username;
         $DBData["Timestamp"] = $this->retrieveTimestamp($Username);
         $DBData["ELO"] = $this->retrieveELO($Username);
@@ -1025,6 +1031,65 @@ class DataLayer
             } else {
                 //print ("Unknown error");
             }
+        }
+    }
+    
+    
+      function incrementGamesPlayed($Username){
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+        $con->set_charset('utf8');
+        if ($con->connect_errno) {
+		return false;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("
+                                     UPDATE base_table
+                                     SET GamesPlayed=GamesPlayed + 1
+                                     WHERE Username=?
+                                     ");
+            $comand->bind_param('s',$Username); 
+            $res=$comand->execute();
+            if($res){
+                $comand->close();
+                $con->close();
+                return true;
+            }else if($con->errno){
+                //print ("Error with execute query ($con->errno): $con->error");
+                return false;
+            } else{
+                //print ("Unknown error");
+                return false;
+            }
+        }
+    }
+    
+    function retrieveGamesPlayed($Username){
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+     
+        $con->set_charset('utf8');
+        
+         if ($con->connect_errno) {
+				return NULL;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("SELECT GamesPlayed FROM base_table WHERE Username = ?");
+            $comand->bind_param('s', $Username); 
+            $res=$comand->execute();
+            $GamesPlayed = NULL;
+            $comand->bind_result($GamesPlayed);
+            if ($res) {
+                if ($comand->fetch()) {
+                   $comand->close();
+                   $con->close();
+                }
+                return $GamesPlayed;
+            } else if ($con->errno) {
+                //print ("Error with execute query ($con->errno): $con->error");
+                return NULL;
+            } else {
+                //print ("Unknown error");
+                return NULL;
+            } 
         }
     }
 	

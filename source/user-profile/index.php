@@ -46,6 +46,94 @@
            Logout();
            exit();
        }
+         else if($_GET['function'] == 'deleteUser')
+       {
+           $username=$_POST['Username'];
+           $password=$_POST['Password'];
+           deleteUser($username,$password);
+           exit();
+       }
+         else if($_GET['function'] == 'retrieveData')
+       {
+            $username=$_POST['Username'];
+           retrieveData($username);
+           exit();
+       }
+       
+        else if($_GET['function'] == 'pushData')
+       {
+             $Username=null; 
+             if(isset($_POST['Username'])) {
+                  $Username=$_POST['Username'];
+             }
+             $Timestamp=null;
+              if(isset($_POST['Timestamp'])) {
+                  $Timestamp=$_POST['Timestamp'];
+             }
+             $ELO=null; 
+              if(isset($_POST['ELO'])) {
+                  $ELO=$_POST['ELO'];
+             }
+             $KVAL=null;
+              if(isset($_POST['KVAL'])) {
+                  $KVAL=$_POST['KVAL'];
+             }
+             $ANGRY=null;
+             if(isset($_POST['ANGRY'])) {
+                  $ANGRY=$_POST['ANGRY'];
+             }
+             $ANXIOUS=null;
+               if(isset($_POST['ANXIOUS'])) {
+                  $ANXIOUS=$_POST['ANXIOUS'];
+             }
+             $JOYFUL=null;
+             if(isset($_POST['JOYFUL'])) {
+                  $JOYFUL=$_POST['JOYFUL'];
+             }
+             $NEUTRAL=null;
+              if(isset($_POST['NEUTRAL'])) {
+                  $NEUTRAL=$_POST['NEUTRAL'];
+             }
+             $SAD=null;
+              if(isset($_POST['SAD'])) {
+                  $SAD=$_POST['SAD'];
+             }
+             $SURPRISED=null;
+             if(isset($_POST['SURPRISED'])) {
+                  $SURPRISED=$_POST['SURPRISED'];
+             }
+             
+             pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED);
+             
+           exit();
+       }
+          else if($_GET['function'] == 'retrieveLevelProgress')
+       {
+            $username=$_POST['Username'];
+           retrieveLevelProgress($username);
+           exit();
+       }
+         else if($_GET['function'] == 'updateLevelProgress')
+       {
+            $username=$_POST['Username'];
+            $jsonString=$_POST['JsonString'];
+           updateLevelProgress($username,$jsonString);
+           exit();
+       }
+         else if($_GET['function'] == 'incrementGamesPlayed')
+       {
+            $username=$_POST['Username'];
+           incrementGamesPlayed($username);
+           exit();
+       }
+        else if($_GET['function'] == 'retrieveGamesPlayed')
+       {
+            $username=$_POST['Username'];
+           retrieveGamesPlayed($username);
+           exit();
+       }
+             
+       
         }
         else{
          header("Location: LoginView.php");
@@ -67,6 +155,26 @@
          header('Content-type: application/json');
         echo json_encode($jsonObj);
      }
+     
+     
+    function pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED){ 
+          $jsonObj = new stdClass();
+            $service = new DataLayer();
+            $DBData["Username"] = $Username;
+            $DBData["Timestamp"] = $Timestamp;
+            $DBData["ELO"] = $ELO;
+            $DBData["KVAL"] = $KVAL;
+            $DBData["ANGRY"] = $ANGRY;
+            $DBData["ANXIOUS"] = $ANXIOUS;
+            $DBData["JOYFUL"] = $JOYFUL;
+            $DBData["NEUTRAL"] = $NEUTRAL;
+            $DBData["SAD"] = $SAD;
+            $DBData["SURPRISED"] = $SURPRISED;
+            $jsonObj->status=$service->pushData($DBData);
+            
+             header('Content-type: application/json');
+             echo json_encode($jsonObj);
+      }
     
     function login($Username,$Password){
            
@@ -91,6 +199,87 @@
         echo json_encode($jsonObj);
     }
     
+    
+      function deleteUser($Username,$Password){
+           
+     $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->status=$service->deleteUser($Username,$Password);
+     
+    
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+    }
+    
+    
+    function retrieveData($Username){
+           
+     $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->Data=$service->retrieveData($Username);
+     $jsonObj->status=true;
+     if($jsonObj->Data==null){
+        $jsonObj->status=false; 
+     }
+    
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+    }
+    
+    
+    function updateLevelProgress($username,$jsonString)
+    {
+      $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->status=$service->updateLevelProgress($username, $jsonString);
+    
+    
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+    }
+    
+    function incrementGamesPlayed($username){
+        $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->status=$service->incrementGamesPlayed($username);
+    
+    
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+    }
+    
+   function  retrieveGamesPlayed($Username){
+           
+     $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->Data=$service->retrieveGamesPlayed($Username);
+     $jsonObj->status=true;
+     if($jsonObj->Data==null){
+        $jsonObj->status=false; 
+     }   
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+   }
+    
+     function retrieveLevelProgress($Username){
+           
+     $jsonObj = new stdClass();
+     
+     $service = new DataLayer();
+     $jsonObj->Data=$service->retrieveLevelProgress($Username);
+     $jsonObj->status=true;
+     if($jsonObj->Data==null){
+        $jsonObj->status=false; 
+     }
+    
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+    }
     
     
    function Register($Username,$Password,$Email){
