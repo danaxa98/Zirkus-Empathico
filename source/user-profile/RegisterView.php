@@ -94,28 +94,28 @@ input{
     <body class="bg">
         <div id="ok"></div>
         <div style="text-align:center;margin-top:-31%">
-            <input type="text" id="Username" placeholder="Username" class="inputStyle">
+            <input type="text" id="Username" placeholder="Benutzername" class="inputStyle">
             
         </div>
-        <div style="text-align:center;height: 50px">
+        <div style="text-align:center;height: 60px">
                 <div class="hide" id="UsernameAlert">
             <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
-            <div class="AlertTextStyle" ><b id="UsernameAlertMessage">The username already exists please choose another name</b></div>
+            <div class="AlertTextStyle" ><b id="UsernameAlertMessage">Dieser Benutzername ist bereits vergeben, bitte wähle einen anderen Namen</b></div>
                 </div>
         </div>
         <div style="text-align:center;">
             
-            <input type="password" id="Password" placeholder="Password" class="inputStyle">
+            <input type="password" id="Password" placeholder="Passwort" class="inputStyle">
         </div>
          <div style="text-align:center;margin-top:2%">
-            <input type="password" id="ConfirmPass" placeholder="Confirm Password" class="inputStyle">
+            <input type="password" id="ConfirmPass" placeholder="Passwort bestätigen" class="inputStyle">
         </div>
              <div style="text-align:center;height: 70px">
                  <div class="hide" id="PasswordAlert">
             <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
-            <div class="AlertTextStyle" ><b id="PasswordAlertMessage">Your password and confirmation password do not match.</b></div>
+            <div class="AlertTextStyle" ><b id="PasswordAlertMessage">Die Passwörter stimmen nicht überein.</b></div>
         </div>
              </div>
          <div style="text-align:center">
@@ -131,7 +131,7 @@ input{
          <div style="text-align:center">
              <button type="button"  class="buttonStyle" onclick="Register()">
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
-                 <span class="spanInButton">Submit </span>
+                 <span class="spanInButton">Absenden </span>
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
@@ -149,7 +149,7 @@ input{
     
     
     if(username===undefined || username==null || username==''){
-   $("#UsernameAlertMessage").html("Username field is required");
+   $("#UsernameAlertMessage").html("Bitte Benutzernamen angeben");
     var UsernameAlert= $("#UsernameAlert");
           UsernameAlert.removeClass("show");
            UsernameAlert.removeClass("hide");
@@ -166,7 +166,7 @@ input{
   }
   
   if(pass===undefined || pass==null || pass==''){
-   $("#PasswordAlertMessage").html("Password field is required");
+   $("#PasswordAlertMessage").html("Bitte Passwort angeben");
     var PassAlert= $("#PasswordAlert");
      PassAlert.removeClass("show");
      PassAlert.removeClass("hide");
@@ -176,7 +176,7 @@ input{
      var PassAlert= $("#PasswordAlert");
      PassAlert.removeClass("show");
      PassAlert.removeClass("hide");
-    $("#PasswordAlertMessage").html( "Your password and confirmation password do not match");
+    $("#PasswordAlertMessage").html( "Die Passwörter stimmen nicht überein");
      PassAlert.addClass("show");
      violation=true;
   }else{
@@ -239,7 +239,7 @@ input{
                           UsernameAlert.removeClass("show");
                           UsernameAlert.removeClass("hide");
                           
-                          $("#UsernameAlertMessage").html("The username already exists please choose another name");
+                          $("#UsernameAlertMessage").html("Dieser Benutzername ist bereits vergeben, bitte wähle einen anderen Namen");
                           UsernameAlert.addClass("show");
                           
                    }

@@ -68,6 +68,16 @@ input{
   margin-top:-30px;
   
 }
+.AlertTextStyle{
+    width: 200px !important;
+    height: 40px !important;
+    margin-left:38% !important;
+    margin-top:-53px !important;
+    margin-bottom: 15px;
+    color:red;
+
+}
+
 
 .show{
     display:block;
@@ -86,21 +96,27 @@ input{
    <body class="bg">
      
        <div class="show" id="ResetInputs"> 
-        <div style="text-align:center;margin-top:-11%">
-            <input type="text" id="Username" placeholder="Username" class="inputStyle">
+        <div style="text-align:center;margin-top:-9%">
+            <input type="text" id="Username" placeholder="Benutzername" class="inputStyle">
             
         </div>
-  
+              <div class="hide" id="MessageAlert" style="text-align:center;height: 30px">
+            <div  >
+            <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-270px;margin-bottom: -40px" >
+            
+               <div class="AlertTextStyle" ><b id="MessageAlertText"></b></div>
+        </div>
+             </div>
         
          <div style="text-align:center;margin-top:3%">
              <button type="button"  class="buttonStyle"  onclick="SendRequest()">
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
-                 <span class="spanInButton">Send Request </span>
+                 <span class="spanInButton">Senden </span>
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
        </div>
-       <p id="Message" class="hide" style="text-align:center;margin-top:-9%;margin-left:-5%;font-size:18px"><b>The link for the passport reset <br> is sent to your Email address <br> Please check your Email.</p>
+       <p id="Message" class="hide" style="text-align:center;margin-top:-9%;margin-left:-5%;font-size:18px"><b Id="MessageText"></b></p>
     
     </body>
 </html>
@@ -126,19 +142,29 @@ input{
 
                         success: function(result)
                         {
+                            console.log(result);
                       if(result!=null && result.status==true)
                       {
-                       console.log(result);
+                       
                       
 
                         var ResetInputs=$("#ResetInputs");
                        var Message=$("#Message");
+                       
+                         var MessageText=$("#MessageText");
+                       MessageText.html("Ein Link zum Zurücksetzen <br> deines Passwortes wurde <br> dir per E-Mail zugeschickt. <br> Bitte prüfe dein Postfach.");
                         ResetInputs.removeClass("show");
                        ResetInputs.addClass("hide");
                       Message.removeClass("hide");
                        Message.addClass("show");
                        }
-                      else{}
+                      else{
+                          $("#MessageAlertText").html(result.message);
+                           var Alert= $("#MessageAlert");
+                           Alert.removeClass("show");
+                           Alert.removeClass("hide");
+                           Alert.addClass("show");
+                      }
                     }
                 });
   }

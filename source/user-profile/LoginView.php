@@ -103,27 +103,28 @@ input{
      session_start();
      if(isset($_SESSION["Succes"])){
    echo '<body id="body" class="bgSuccessfull">';
+         $_SESSION["Succes"]=null;
      }
      else{
          echo '<body id="body" class="bg">';
      }
             ?>
         <div style="text-align:center;margin-top:-11%">
-            <input type="text" id="Username" placeholder="Username" class="inputStyle">
+            <input type="text" id="Username" placeholder="Benutzername" class="inputStyle">
             
         </div>
         <div style="text-align:center;margin-top:3%">
-            <input type="password" id="Password" placeholder="Password" class="inputStyle">
+            <input type="password" id="Password" placeholder="Passwort" class="inputStyle">
         </div>
     
     <div style="text-align:center;margin-top:1%">
-        <a style="margin-left:-5%;margin-right: 10px" href="/user-profile/PassChangeReguestView.php">Forgot Password?</a><a href="/user-profile/RegisterView.php">Register</a>
+        <a style="margin-left:-5%;margin-right: 10px" href="/user-profile/PassChangeReguestView.php">Passwort vergessen?</a><a href="/user-profile/RegisterView.php">Registrierung</a>
         </div>
         
          <div style="text-align:center;margin-top:1%">
              <button type="button"  class="buttonStyle" value="Submit" onclick="login()">
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
-                 <span class="spanInButton">Submit </span>
+                 <span class="spanInButton">Absenden </span>
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
@@ -134,11 +135,10 @@ input{
 <script>
     
     var login=function(){
-        console.log("uso");
+
     var username=$("#Username").val();
     var pass=$("#Password").val();
-    console.log(username);
-    console.log(pass);
+
     
     
     var hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 1});

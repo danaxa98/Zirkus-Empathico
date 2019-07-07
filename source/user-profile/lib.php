@@ -775,6 +775,40 @@ class DataLayer
         }
     }
     
+      function returnEmail($Username){
+        $exists = false;
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+        $con->set_charset('utf8');
+        
+         if ($con->connect_errno) {
+			 return false;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("SELECT EmailAddress FROM base_table WHERE Username=?");
+            $comand->bind_param('s',$Username);
+            $res=$comand->execute();
+            
+            $Email = NULL;
+            $EmailAddress=NULL;
+            $comand->bind_result($EmailAddress);
+            
+            if($res){
+                if($comand->fetch()){
+                    $Email=$EmailAddress;
+                }
+                $comand->close();
+                $con->close();
+            } else if($con->errno){
+                //print ("Error with execute query ($con->errno): $con->error");
+                return false;
+            } else{
+                //print ("Unknown error");
+                return false;
+            }
+            return $Email;
+        }
+    }
+    
 	/*
 	Inserts a user into the base table and inserts default starting scores into the score tables for the newly created user.
 	@input
@@ -1098,8 +1132,71 @@ class DataLayer
             } 
         }
     }
-	
-	    function PasswordResetInsert($Username,$Guid){
+    
+//     function CheckUsernameForPassReset($Username){
+//        $username = null;
+//        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+//        $con->set_charset('utf8');
+//        
+//        
+//         if ($con->connect_errno) {
+//			 return null;
+//            //print ("Conn error ($con->connect_errno): $con->connect_error");
+//        } else {
+//            
+//            $result=NULL;
+//            $comand = $con->prepare("SELECT Username FROM PasswordResetRequests WHERE Username=?");
+//            $comand->bind_param('s',$Username);
+//            $res=$comand->execute();
+//            
+//            $Username = NULL;
+//            $comand->bind_result($Username);
+//            
+//            if($res){
+//                if($comand->fetch()){
+//                    $result=($Username!=NULL);
+//                }
+//                $comand->close();
+//                $con->close();
+//            } else if($con->errno){
+//                //print ("Error with execute query ($con->errno): $con->error");
+//                return null;
+//            } else{
+//                //print ("Unknown error");
+//                return null;
+//            }
+//            return $result;
+//        }
+//    }
+      function PasswordResetDelete($Username){
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+        $con->set_charset('utf8');
+        if ($con->connect_errno) {
+		return false;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("
+                                     Delete From PasswordResetRequests
+                                     WHERE Username=?
+                                     ");
+            $comand->bind_param('s',$Username); 
+            $res=$comand->execute();
+            if($res){
+                $comand->close();
+                $con->close();
+                return true;
+            }else if($con->errno){
+                //print ("Error with execute query ($con->errno): $con->error");
+                return false;
+            } else{
+                //print ("Unknown error");
+                return false;
+            }
+        }
+    }
+	 function PasswordResetInsert($Username,$Guid){
+                
+               
         $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
         $con->set_charset('utf8');
         if ($con->connect_errno) {
@@ -1157,6 +1254,68 @@ class DataLayer
                 return null;
             }
             return $username;
+        }
+    }
+    
+      function setNewPass($Username, $Password){
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+        $con->set_charset('utf8');
+        if ($con->connect_errno) {
+		return false;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("
+                                     UPDATE base_table
+                                     SET HashedPassword=?
+                                     WHERE Username=?
+                                     ");
+            $comand->bind_param('ss',$Password, $Username); 
+            $res=$comand->execute();
+            if($res){
+                $comand->close();
+                $con->close();
+                return true;
+            }else if($con->errno){
+                //print ("Error with execute query ($con->errno): $con->error");
+                return false;
+            } else{
+                //print ("Unknown error");
+                return false;
+            }
+        }
+    }
+	
+
+    
+
+    
+    
+      function RemoveRequestForPassReset($Guid,$Username){
+        $username = null;
+        $con = new mysqli(self::db_host,self::db_username,self::db_pass,self::db_databaseName);
+        $con->set_charset('utf8');
+        
+         if ($con->connect_errno) {
+			 return null;
+            //print ("Conn error ($con->connect_errno): $con->connect_error");
+        } else {
+            $comand = $con->prepare("delete FROM PasswordResetRequests WHERE Username=?");
+            $comand->bind_param('s',$Username);
+            $res=$comand->execute();
+            
+  
+            
+            if($res){
+                $comand->close();
+                $con->close();
+            } else if($con->errno){
+                //print ("Error with execute query ($con->errno): $con->error");
+                return null;
+            } else{
+                //print ("Unknown error");
+                return null;
+            }
+            return true;
         }
     }
 

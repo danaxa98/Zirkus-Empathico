@@ -31,10 +31,13 @@
             exit();
        }
        
-        else if($_GET['function'] == 'PasswordReset')
+        else if($_GET['function'] == 'passReset')
        {
             $username=$_POST['Username'];
+            $guid=$_POST['Guid'];
             $password=$_POST['Password'];
+            
+            passReset($username,$password,$guid);
        }
         else if($_GET['function'] == 'isAuthenticated')
        {
@@ -55,8 +58,13 @@
        }
          else if($_GET['function'] == 'retrieveData')
        {
+             $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
             $username=$_POST['Username'];
-           retrieveData($username);
+           retrieveData($username,$SessionUser);
            exit();
        }
        
@@ -103,35 +111,69 @@
                   $SURPRISED=$_POST['SURPRISED'];
              }
              
-             pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED);
+              $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
+             
+             pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED,$SessionUser);
              
            exit();
        }
           else if($_GET['function'] == 'retrieveLevelProgress')
        {
             $username=$_POST['Username'];
-           retrieveLevelProgress($username);
+            
+             $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
+               
+           retrieveLevelProgress($username,$SessionUser);
            exit();
        }
          else if($_GET['function'] == 'updateLevelProgress')
        {
             $username=$_POST['Username'];
             $jsonString=$_POST['JsonString'];
-           updateLevelProgress($username,$jsonString);
+             $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
+           updateLevelProgress($username,$jsonString,$SessionUser);
            exit();
        }
          else if($_GET['function'] == 'incrementGamesPlayed')
        {
             $username=$_POST['Username'];
-           incrementGamesPlayed($username);
+            
+             $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
+               
+           incrementGamesPlayed($username,$SessionUser);
            exit();
        }
         else if($_GET['function'] == 'retrieveGamesPlayed')
        {
             $username=$_POST['Username'];
-           retrieveGamesPlayed($username);
+            
+             $SessionUser=null;
+             session_start();
+              if(isset($_SESSION["User"])){
+                $SessionUser=$_SESSION["User"];
+               }
+               
+           retrieveGamesPlayed($username,$SessionUser);
            exit();
        }
+       
+       
              
        
         }
@@ -139,7 +181,7 @@
          header("Location: LoginView.php");
          die();
         }
-//        $_SESSION["Succes"]="Uspesno";
+
              
         
    function isAuthenticated()
@@ -147,7 +189,8 @@
          $jsonObj = new stdClass();
          session_start();
         if(isset($_SESSION["User"])){
-            $jsonObj=$_SESSION["User"];
+            $jsonObj->username=$_SESSION["User"];
+            $jsonObj->status=True;
         }
         else{
          $jsonObj->status=False;
@@ -157,8 +200,17 @@
      }
      
      
-    function pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED){ 
+    function pushData($Username,$Timestamp,$ELO,$KVAL,$ANGRY,$ANXIOUS,$JOYFUL,$NEUTRAL,$SAD,$SURPRISED,$SessionUser){ 
           $jsonObj = new stdClass();
+          
+            if($Username!=$SessionUser){
+                 $jsonObj->status=false;
+      
+                header('Content-type: application/json');
+                 echo json_encode($jsonObj);
+        
+                 return;
+                }
             $service = new DataLayer();
             $DBData["Username"] = $Username;
             $DBData["Timestamp"] = $Timestamp;
@@ -179,20 +231,14 @@
     function login($Username,$Password){
            
      $jsonObj = new stdClass();
-//     if($Username=='Jovan'){
-//     $jsonObj->status=True;
-//      
-//     }
-//     else{
-//      $jsonObj->status=False;
-//     }
+
      
      $service = new DataLayer();
      $jsonObj->status=$service->verifyLogin($Username,$Password);
      if($jsonObj->status){
        session_start();
        $jsonObj->username=$Username;
-       $_SESSION["User"]=$jsonObj;
+       $_SESSION["User"]=$Username;
      }
     
        header('Content-type: application/json');
@@ -213,9 +259,18 @@
     }
     
     
-    function retrieveData($Username){
+    function retrieveData($Username,$SessionUser){
            
      $jsonObj = new stdClass();
+     
+     if($Username!=$SessionUser){
+      $jsonObj->status=false;
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        
+        return;
+     }
      
      $service = new DataLayer();
      $jsonObj->Data=$service->retrieveData($Username);
@@ -229,9 +284,18 @@
     }
     
     
-    function updateLevelProgress($username,$jsonString)
+    function updateLevelProgress($username,$jsonString,$SessionUser)
     {
       $jsonObj = new stdClass();
+      
+        if($username!=$SessionUser){
+      $jsonObj->status=false;
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        
+        return;
+     }
      
      $service = new DataLayer();
      $jsonObj->status=$service->updateLevelProgress($username, $jsonString);
@@ -241,8 +305,17 @@
         echo json_encode($jsonObj);
     }
     
-    function incrementGamesPlayed($username){
+    function incrementGamesPlayed($username,$SessionUser){
         $jsonObj = new stdClass();
+        
+          if($username!=$SessionUser){
+             $jsonObj->status=false;
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        
+        return;
+     }
      
      $service = new DataLayer();
      $jsonObj->status=$service->incrementGamesPlayed($username);
@@ -252,9 +325,18 @@
         echo json_encode($jsonObj);
     }
     
-   function  retrieveGamesPlayed($Username){
+   function  retrieveGamesPlayed($Username,$SessionUser){
            
      $jsonObj = new stdClass();
+     
+       if($Username!=$SessionUser){
+      $jsonObj->status=false;
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        
+        return;
+     }
      
      $service = new DataLayer();
      $jsonObj->Data=$service->retrieveGamesPlayed($Username);
@@ -266,9 +348,18 @@
         echo json_encode($jsonObj);
    }
     
-     function retrieveLevelProgress($Username){
+     function retrieveLevelProgress($Username,$SessionUser){
            
      $jsonObj = new stdClass();
+     
+       if($Username!=$SessionUser){
+      $jsonObj->status=false;
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        
+        return;
+      }
      
      $service = new DataLayer();
      $jsonObj->Data=$service->retrieveLevelProgress($Username);
@@ -297,6 +388,28 @@
     }
     
     
+     function passReset($username,$password,$guid)
+     {
+           $jsonObj = new stdClass();
+       $service = new DataLayer();
+       $tableUsername=$service->ReturnUsernameForPassReset($guid);
+       if($username!=$tableUsername){
+           $jsonObj->status=false;
+           header('Content-type: application/json');
+        echo json_encode($jsonObj);
+        return;
+       }
+       
+       
+      $jsonObj->status=$service->setNewPass($username, $password);
+      $service->RemoveRequestForPassReset($guid,$username);
+      
+      
+       header('Content-type: application/json');
+        echo json_encode($jsonObj);
+     }
+    
+    
      function Logout(){
            
      $jsonObj = new stdClass();
@@ -320,13 +433,31 @@
           $jsonObj = new stdClass();
          //check if user exist
          //check if user exist and return Email or null
+            $service = new DataLayer();
+         if(!$service->usernameExists($Username)){
+             $jsonObj->status=false;
+             $jsonObj->message="Benutzer existiert nicht";
+              header('Content-type: application/json');
+              echo json_encode($jsonObj);
+              return;
+         }
+        
+             $Email=$service->returnEmail($Username);
+           if($Email==null || $Email=="" || $Email==false){
+             $jsonObj->status=false;
+             $jsonObj->message="Dieser Benutzer hat keine E-Mailadresse angegeben";
+              header('Content-type: application/json');
+              echo json_encode($jsonObj);
+              return;
+         }
+         
          //generate Guid
          $Guid= GUID();
          //enter record in database
-      $service = new DataLayer();
+
       $jsonObj->status=$service->PasswordResetInsert($Username,$Guid);
-     // $jsonObj->status=True;
-      SendMail("jocaenimen@gmail.com", $Guid);
+
+      SendMail($Email, $Guid);
          //send mail
          //return true
       
@@ -334,41 +465,16 @@
         echo json_encode($jsonObj);
      }
         
-    function PasswordReset($Username,$Password){
-         
-         //check if user exist in PassResetTable and delete if exist
-        // change password
-         //return true
-     }
+  
      
      
      function SendMail($Email,$Guid){
-//        $from = "studie@zirkus-empathico.de";
-//    $to = 'jocaenimen@gmail.com';
-//    $subject = "Password Resset";
-//        
-////  $mail_content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-////<html xmlns="http://www.w3.org/1999/xhtml">
-////<head>
-////<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-////</head>
-////<body>
-////
-////<div>
-////        <p>Please click the following link to proceed to the password reset "<a href ="https://dev.zirkus-empathico.de/user-profile/PassChangeReguestView.php?Guid="'+$Guid+'>Password Reset</a>"</p>
-////
-////
-////</div>
-////</body>
-////</html>';
-//    $message='test';
-//    $headers = "From:" . $from;
-//    mail($to,$subject,$message, $headers);
+
          
           $from = "studie@zirkus-empathico.de";
     $to = $Email;
+    //$subject = "Anfrage zum Passwort Zurücksetzen";
     $subject = "Password Reset Request";
-    
 
     
       $headers = 'MIME-Version: 1.0' . "\r\n";
@@ -379,10 +485,12 @@
      
      
      $message = '<html><body>';
-$message .= '<h4 style="color:#f40;">Please click the following link to proceed to the password reset!</h4>';
-$message .= '<a href="https://dev.zirkus-empathico.de/user-profile/PasswordReset.php?Guid='.$Guid.'">Password Reset</a></p>';
+$message .= '<h4 style="color:#f40;">Bitte klicke auf den Link um dein Passwort zurückzusetzen!</h4>';
+$message .= '<a href="https://dev.zirkus-empathico.de/user-profile/PasswordReset.php?Guid='.$Guid.'">Passwort zurücksetzen</a></p>';
 $message .= '</body></html>';
     mail($to,$subject,$message, $headers);
+    
+    
      }
      
    function GUID()

@@ -43,7 +43,7 @@ and open the template in the editor.
 }
 
 .inputStyle{
-    width: 230px !important;
+    width: 275px !important;
     height: 30px !important;
     margin-left:25px;
 }
@@ -96,8 +96,8 @@ input{
               <?php
      session_start();
     if(isset($_SESSION['ResetPassUsername'])) {
-       
-     echo  '<input type="text" disabled="disabled" class="inputStyle" value="'.$_SESSION["ResetPassUsername"].'">';
+       echo  '<input type="hidden" id="Guid" disabled="disabled" value="'.$_SESSION["ResetPassGuid"].'">';
+     echo  '<input type="text" id="Username" disabled="disabled" class="inputStyle" value="'.$_SESSION["ResetPassUsername"].'">';
         }
        ?>
             
@@ -106,30 +106,98 @@ input{
         </div>
         <div style="text-align:center;">
             
-            <input type="password" placeholder="New Password" class="inputStyle">
+            <input type="password" id="Password" placeholder="Neues Passwort" class="inputStyle">
         </div>
          <div style="text-align:center;margin-top:2%">
-            <input type="password" placeholder="Confirm New Password" class="inputStyle">
+            <input type="password" id="ConfirmPass" placeholder="Neues Passwort bestätigen" class="inputStyle">
         </div>
              <div style="text-align:center;height: 70px">
-            <div class="hide">
+            <div class="hide" id="PasswordAlert">
             <img src="/user-profile/Images/fox.png" width="70px" height="100px" style="margin-left:-250px;margin-bottom: -40px" >
             
-            <div class="AlertTextStyle" ><b>Your password and confirmation password do not match.</b></div>
+               <div class="AlertTextStyle" ><b id="PasswordAlertMessage">Die Passwörter stimmen nicht überein.</b></div>
         </div>
              </div>
         
          <div style="text-align:center">
              <button type="button"  class="buttonStyle" value="Submit">
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
-                 <span class="spanInButton">Submit </span>
+                 <span class="spanInButton" onclick="Send()">Absenden </span>
                  <img src="/user-profile/Images/sova.png" width="30px" height="40px" stye="margin-top:-10px">
              </button>
         </div>
     </body>
 </html>
- 
+ <script src="/user-profile/Js/SHA.js"></script>
 <script>
-    
+    var Send=function(){
+     var username=$("#Username").val();
+      var pass=$("#Password").val();
+      var confirmPass=$("#ConfirmPass").val();
+      
+      var Guid=$("#Guid").val();
+      
+
+      
+      var violation=false;
+      
+      
+        if(pass===undefined || pass==null || pass==''){
+   $("#PasswordAlertMessage").html("Bitte Passwort angeben");
+    var PassAlert= $("#PasswordAlert");
+     PassAlert.removeClass("show");
+     PassAlert.removeClass("hide");
+     PassAlert.addClass("show");
+  violation=true;
+  } else if(pass!=confirmPass){
+     var PassAlert= $("#PasswordAlert");
+     PassAlert.removeClass("show");
+     PassAlert.removeClass("hide");
+    $("#PasswordAlertMessage").html( "Die Passwörter stimmen nicht überein");
+     PassAlert.addClass("show");
+     violation=true;
+  }else{
+        var PassAlert= $("#PasswordAlert");
+     PassAlert.removeClass("show");
+     PassAlert.removeClass("hide");
+     PassAlert.addClass("hide");
+  }
+   
+   if(violation){
+      return;
+  }
+    var hashObj = new jsSHA("SHA-512", "TEXT", {numRounds: 1});
+  hashObj.update(pass);
+  var HashPass = hashObj.getHash("HEX");
+  
+    $.ajax({
+      url: "/user-profile/index.php?function=passReset",
+                        type: "POST",
+
+                        contentType:'application/x-www-form-urlencoded',
+                        cache: false,
+
+                        data:{
+                        "Username":username,
+                        "Password":HashPass,
+                        "Guid":Guid
+                        },
+
+                        success: function(result)
+                        {
+                      if(result!=null && result.status==true)
+                      {
+                      window.location.href="/user-profile/LoginView.php"
+                       }
+                  
+                       },
+                       error:function(ex){
+                           alert(ex);
+                       }
+                       
+                });
+                            
+            }
+              
 
 </script>
