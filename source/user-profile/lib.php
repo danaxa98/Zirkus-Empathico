@@ -2,10 +2,10 @@
 
 class DataLayer
 {
-    const db_host = "146.66.85.55";
+    const db_host = "localhost";
     const db_username = "zirkusem_dbv2";
     const db_pass = "empathie100%";
-    const db_databaseName = "zirkusem_trainingv2_dev";
+    const db_databaseName = "zirkusem_trainingv2_public";
     
     
 //    const db_host = "localhost";
