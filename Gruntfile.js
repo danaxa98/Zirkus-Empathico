@@ -944,7 +944,7 @@ module.exports = function(grunt) {
 		'copy:svg_images',
 		'copy:ajax',
 		'copy:userprofile',
-		// 'copy:media',
+		'copy:media',
 		'copy:bower_components',
 		'copy:favicon',
 		'copy:fonts',

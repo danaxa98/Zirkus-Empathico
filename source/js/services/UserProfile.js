@@ -508,30 +508,20 @@ define('services/UserProfile', ['jquery', 'services/LocalStorage', 'AdaptiveSyst
 
                     //if user just registered all scores will be null so we give back standard
                     if (result.Data.ANGRY === null || result.Data.ANXIOUS === null || result.Data.JOYFUL === null || result.Data.NEUTRAL === null || result.Data.SAD === null || result.Data.SURPRISED === null ){
+                        that.setUserEmotionScores(adaptiveSystem.startingEmotionScores); //setUserEmotionScores also sets localStorage
                         userEmotionScores = adaptiveSystem.startingEmotionScores;
                     }
                     else{
                         userEmotionScores = [['angry', result.Data.ANGRY], ['anxious', result.Data.ANXIOUS], ['joyful', result.Data.JOYFUL], ['neutral', result.Data.NEUTRAL], ['sad', result.Data.SAD], ['surprised', result.Data.SURPRISED]];
+                        localStorage.setEmotionScores(userEmotionScores);
                     }
 
-                    localStorage.setEmotionScores(userEmotionScores);
+                    
 
                 }
-
                 else{
-                    userEmotionScores = adaptiveSystem.startingEmotionScores;
+                    throw('retrieveData result.status = false');
                 }
-            
-            //result.Data is object from database or its null result.Data!=null ?
-            // result.Data.Username 
-            //     result.Data.ELO 
-            //     result.Data.KVAL
-            //     result.Data.ANGRY
-            //     result.Data.ANXIOUS
-            //     result.Data.JOYFUL
-            //     result.Data.NEUTRAL
-            //     result.Data.SAD
-            //     result.Data.SURPRISED
             },
             error: function(result, textStatus, errorThrown){
                 console.log('cant getUserEmotionScores. Error: ');
