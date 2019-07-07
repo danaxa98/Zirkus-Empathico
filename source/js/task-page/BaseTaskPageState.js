@@ -151,17 +151,28 @@ define('task-page/BaseTaskPageState', ['jsb', 'logging', 'jquery', 'services/med
         var that = this;
         that.showElements(['.curtain']);
         that.hideElements(['.manikin', '.library-card', '.backgroundstory', '.hint-video-container',
-                            '.fox-animation', '.first-option', '.second-option', '.third-option', '.second-hint',
+                            '.fox-animation', '.first-option', '.second-option', '.third-option', '.fourth-option', '.fifth-option', '.sixth-option', '.second-hint',
                             '.emotion-list']);
     };
 
     BaseTaskPageState.prototype.hideFaceOptions = function() {
-        this.domElement.find('button').removeClass('is-correct is-incorrect');
-        this.hideElements(['.first-option', '.second-option', '.third-option']);
+        this.domElement.find('button').removeClass('is-correct is-incorrect is-used');
+        this.hideElements(['.first-option', '.second-option', '.third-option', '.fourth-option', '.fifth-option', '.sixth-option']);
     };
 
     BaseTaskPageState.prototype.showFaceOptions = function() {
-        this.showElements(['.first-option', '.second-option', '.third-option']);
+        var optionSelectors = ['.first-option', '.second-option', '.third-option','.fourth-option', '.fifth-option', '.sixth-option'];
+
+        var faceOptionsToShow = [];
+        
+        for (var i = 0; i <  localStorage.getNumberOfChoicesForCurrentTask(); i++){
+            faceOptionsToShow.push(optionSelectors[i]);
+            
+        }
+
+        this.showElements(faceOptionsToShow);
+
+        //this.showElements(['.first-option', '.second-option', '.third-option', '.fourth-option', '.fifth-option', '.sixth-option']);
     };
 
     BaseTaskPageState.prototype.hideElements = function(aryCss) {

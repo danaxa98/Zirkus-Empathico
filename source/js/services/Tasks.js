@@ -12,8 +12,8 @@
  * @property {String} excludePerson - A list of person who not be selected as face video
  * like 'context_NAME_EXTENTION.mp4'.
  */
-define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks'],
-    function(jsb, logging, localStorage, tasksData)
+define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks', 'AdaptiveSystem', 'services/UserProfile'],
+    function(jsb, logging, localStorage, tasksData, AdaptiveSystem, userProfile)
 {
     "use strict";
 
@@ -28,7 +28,32 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
      * @returns {Task}
      */
     Tasks.prototype.getRandomNextTaskByMiniGameIdAndLevelId = function(miniGameId, levelId) {
+
         var tasks = this.getTasksByMiniGameIdAndLevelId(miniGameId, levelId);
+
+        if (miniGameId === 2){
+
+            var chosenEmotion = AdaptiveSystem.chooseEmotion( userProfile.getUserEmotionScores() );
+
+            var taskConstraints = AdaptiveSystem.generateTask(chosenEmotion[0], chosenEmotion[1], userProfile.getUserEloScore() );
+            
+            localStorage.setLastEmotionPlayed(chosenEmotion[0]);
+            localStorage.setNumberOfChoicesForCurrentTask(taskConstraints[0]);
+
+            
+            localStorage.setCurrentTimeConstraint( taskConstraints[1] );
+            localStorage.setExpectedSuccessRate(taskConstraints[2]);
+
+            tasks = this.getTasksByMiniGameIdAndEmotionAndChoices(miniGameId, chosenEmotion[0], taskConstraints[0] );
+
+            localStorage.setCurrentTimeConstraintAchieved(true);
+
+            //setting time for timeconstraint + 10 seconds for fox explaining video and options
+            localStorage.setCurrentTimerID( setTimeout( function(){ localStorage.setCurrentTimeConstraintAchieved(false); }, localStorage.getCurrentTimeConstraint() * 1000 + 10000 ) );
+
+        }
+
+        
         var unsolvedTasks = [];
 
         if (tasks.length === 0) {
@@ -82,6 +107,26 @@ define('services/Tasks', ['jsb', 'logging', 'services/LocalStorage', 'data/Tasks
 
         return tasks;
     };
+
+    /**
+     * Get all Task filtered by miniGameId and emotion.
+     * @param {Integer} [miniGameId]
+     * @param {String} [emotion]
+     * @param {Integer} [numberOfChoices]
+     * @returns {Array}
+     */
+    Tasks.prototype.getTasksByMiniGameIdAndEmotionAndChoices = function(miniGameId, emotion, numberOfChoices) {
+        var tasks = [];
+        var tasksDataLength = tasksData.length;
+
+        for (var i = 0; i < tasksDataLength; i++) {
+            if (emotion == tasksData[i].emotion && miniGameId == tasksData[i].miniGameId && tasksData[i].alternatives.length >= numberOfChoices - 1) {
+                tasks.push(tasksData[i]);
+            }
+        }
+
+        return tasks;
+    };    
 
     return new Tasks();
 });

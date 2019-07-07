@@ -15,4 +15,30 @@
     -webkit-user-select: none !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
+
+  button#button-logout{
+    position: absolute;
+    right: 133px;
+    border: 2px solid #FCF0CF;
+    height: 40px;
+    width: 40px;
+    top: 62px;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #AC2400;
+    transition: none;
+
+    svg{
+      fill:#FCF0CF;
+    }
+
+    &:active{
+
+      border-color:#AC2400;
+      background-color: #FCF0CF;
+      svg{
+        fill: #AC2400;
+      }
+    }    
+  }
 }

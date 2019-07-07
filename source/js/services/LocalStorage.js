@@ -288,6 +288,19 @@ define('services/LocalStorage',
             return relativePath.replace(/\/?media\//g, deviceUrl);
         }
 
+        // this.logDebug('storeBJ before: ', store.getAll() );
+        // let jsonData = store.serialize( store.getAll() )
+
+        // let retrievedData = store.deserialize(jsonData);
+
+
+
+        // for (var key in retrievedData) {
+
+        //     store.set(key, retrievedData[key]);
+
+        //     }
+        
         return relativePath;
     };
 
@@ -355,7 +368,7 @@ define('services/LocalStorage',
      * @returns {boolean}
      */
     LocalStorage.prototype.isPlayIntro = function() {
-        var lastPauseTime = parseInt(store.get('cordova-last-pause') || (new Date()).getTime());
+        var lastPauseTime = parseInt( store.get('cordova-last-pause') || 0 );
         // 172.800 seconds <=> 2 days
         // 60 * 60 * 2 = 7.200 seconds <=> 2 hours
         return ((new Date()).getTime() - lastPauseTime) / 1000 > 7200;
@@ -436,6 +449,224 @@ define('services/LocalStorage',
         store.set('demo-mode', val);
     };
 
+    /**
+     * Get the last Emotion that was played.
+     * @returns {String} String of the emotion played
+     */
+    LocalStorage.prototype.getLastEmotionPlayed = function() {
+        return store.get('_ADAPTIVE_emotionPlayed') || null;
+    };
+
+/**
+     * Set the last Emotion that was played.
+     * @param {String} emotion String of the emotion played
+     */
+    LocalStorage.prototype.setLastEmotionPlayed = function(emotion) {
+        return store.set('_ADAPTIVE_emotionPlayed', emotion);
+    };
+
+    /**
+     *
+     * @returns {Integer} number of Choices for the task
+     */
+    LocalStorage.prototype.getNumberOfChoicesForCurrentTask = function() {
+        return store.get('_ADAPTIVE_numberOfChoices') || 0;
+    };
+
+    /**
+     * 
+     * @param {Integer} number number of Choices for the task
+     */
+    LocalStorage.prototype.setNumberOfChoicesForCurrentTask = function(number) {
+        return store.set('_ADAPTIVE_numberOfChoices', number);
+    };
+
+    /**
+     *
+     * @returns {Array} an array of emotion (string) and score (float) 
+     */
+    LocalStorage.prototype.getEmotionScores = function() {
+        return store.get('_ADAPTIVE_emotionScores') || false;
+    };
+
+    /**
+     *  eArray = [[emotion.ANGRY, 3200], [emotion.ANXIOUS, 3400], [emotion.JOYFUL, 3650], [emotion.NEUTRAL, 3100], [emotion.SAD, 3200], [emotion.SURPRISED, 3300]];
+     * @param {Array} emotionScoresArray an array of emotion (string) and score (float) (see above)
+     */
+    LocalStorage.prototype.setEmotionScores = function(emotionScoresArray) {
+        return store.set('_ADAPTIVE_emotionScores', emotionScoresArray);
+    };
+
+    /**
+     *
+     * @returns {Integer} number of Games played
+     */
+    LocalStorage.prototype.getNumberOfGamesPlayed = function() {
+        return store.get('_ADAPTIVE_gamesPlayed') || 0;
+    };
+
+    /**
+     * 
+     * @param {Integer} number  number of Games played
+     */
+    LocalStorage.prototype.setNumberOfGamesPlayed = function(number) {
+        return store.set('_ADAPTIVE_gamesPlayed', number);
+    };
+
+    /**
+     *
+     * @returns {Float} expected successrate between 0 and 1
+     */
+    LocalStorage.prototype.getExpectedSuccessRate = function() {
+        return store.get('_ADAPTIVE_expectedSuccessRate') || 0;
+    };
+
+    /**
+     * 
+     * @param {Float} number   expected successrate
+     */
+    LocalStorage.prototype.setExpectedSuccessRate = function(number) {
+        return store.set('_ADAPTIVE_expectedSuccessRate', number);
+    };
+
+    /**
+     *
+     * @returns {Float} get the user elo score
+     */
+    LocalStorage.prototype.getEloScore = function() {
+        return store.get('_ADAPTIVE_userScore') || false;
+    };
+
+    /**
+     * 
+     * @param {Float} number   set the user elo score
+     */
+    LocalStorage.prototype.setEloScore = function(number) {
+        return store.set('_ADAPTIVE_userScore', number);
+    };
+
+    /**
+     *
+     * @returns {Float} time in seconds, -1 for infinite?
+     */
+    LocalStorage.prototype.getCurrentTimeConstraint = function() {
+        return store.get('_ADAPTIVE_timeConstraint') || -1;
+    };
+
+    /**
+     * 
+     * @param {Float} time   in seconds
+     */
+    LocalStorage.prototype.setCurrentTimeConstraint = function(time) {
+        return store.set('_ADAPTIVE_timeConstraint', time);
+    };
+    
+    /**
+     *
+     * @returns {Integer} ID
+     */
+    LocalStorage.prototype.getCurrentTimerID = function() {
+        return store.get('_ADAPTIVE_timerID') || -1;
+    };
+
+    /**
+     * 
+     * @param {Integer} ID   
+     */
+    LocalStorage.prototype.setCurrentTimerID = function(ID) {
+        return store.set('_ADAPTIVE_timerID', ID);
+    };
+
+    /**
+     *
+     * @returns {Boolean} ID
+     */
+    LocalStorage.prototype.isCurrentTimeConstraintAchieved = function() {
+        return store.get('_ADAPTIVE_timerConstraintAchieved');
+    };
+
+    /**
+     * 
+     * @param {Boolean} achieved   true: time hasn't run up yet, false: time over
+     */
+    LocalStorage.prototype.setCurrentTimeConstraintAchieved = function(achieved) {
+        return store.set('_ADAPTIVE_timerConstraintAchieved', achieved);
+    }; 
+
+    /**
+     *
+     * @returns {Float} ID
+     */
+    LocalStorage.prototype.getCurrentScoreChange = function() {
+        return store.get('_ADAPTIVE_currentScoreChange') || 0;
+    };
+
+    /**
+     * 
+     * @param {Float} number   true: time hasn't run up yet, false: time over
+     */
+    LocalStorage.prototype.setCurrentScoreChange = function(number) {
+        return store.set('_ADAPTIVE_currentScoreChange', number);
+    }; 
+    
+    /**
+     *
+     * @returns {String} username
+     */
+    LocalStorage.prototype.getUserName = function() {
+        return store.get('_ADAPTIVE_Username') || '';
+    };
+
+    /**
+     * 
+     * @param {String} username   the username
+     */
+    LocalStorage.prototype.setUserName = function(username) {
+        return store.set('_ADAPTIVE_Username', username);
+    };
+
+    /**
+     *
+     * @returns {boolean} true if the user was allready once redirected to index.html, false else
+     */
+    LocalStorage.prototype.wasRedirected = function() {
+        return store.get('_ADAPTIVE_wasRedirected') || false;
+    };
+
+    /**
+     * 
+     * @param {boolean} wasRedirected   the username
+     */
+    LocalStorage.prototype.setWasRedirected = function(wasRedirected) {
+        return store.set('_ADAPTIVE_wasRedirected', wasRedirected);
+    };    
+
+    /**
+     *
+     * deletes everything in the storage
+     */
+    LocalStorage.prototype.clearStorage = function() {
+        return store.clear();
+    };
+
+    /**
+     *
+     * deletes everything related to AdaptiveSystem in the storage
+     */
+    LocalStorage.prototype.clearAdaptiveStorage = function() {
+        store.remove('_ADAPTIVE_wasRedirected');
+        store.remove('_ADAPTIVE_Username');
+        store.remove('_ADAPTIVE_currentScoreChange');
+        store.remove('_ADAPTIVE_timerConstraintAchieved');
+        store.remove('_ADAPTIVE_timerID');
+        store.remove('_ADAPTIVE_timeConstraint');
+        store.remove('_ADAPTIVE_userScore');
+        store.remove('_ADAPTIVE_expectedSuccessRate');
+        store.remove('_ADAPTIVE_gamesPlayed');
+        store.remove('_ADAPTIVE_emotionScores');
+        store.remove('_ADAPTIVE_numberOfChoices');
+        store.remove('_ADAPTIVE_emotionPlayed');
+    };    
 
     return new LocalStorage();
 });

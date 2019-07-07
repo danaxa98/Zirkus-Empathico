@@ -1,5 +1,5 @@
-define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage', 'store'],
-    function(jsb, logging, $, BasePage, localStorage, store)
+define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStorage'],
+    function(jsb, logging, $, BasePage, localStorage)
 {
     "use strict";
 
@@ -14,8 +14,8 @@ define('StartPage', ['jsb', 'logging', 'jquery', 'BasePage', 'services/LocalStor
 				"objectType": "user"
 			},
 			"verb": "enter-homescreen"
-		});
-
+        });
+        
         if (localStorage.isGameFinished()){
             that.domElement.addClass('game-is-finished');
             that.initEventListener();

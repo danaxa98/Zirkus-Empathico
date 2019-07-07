@@ -1,7 +1,11 @@
-define('app', ['Backbone', 'jsb', 'logging', 'jquery', 'services/LocalStorage', 'services/Levels'],
-    function(Backbone, jsb, logging, $, localStorage, level)
+define('app', ['Backbone', 'jsb', 'logging', 'jquery', 'services/LocalStorage', 'services/Levels', 'services/UserProfile'],
+    function(Backbone, jsb, logging, $, localStorage, level, UserProfile)
 {
     "use strict";
+
+    //checks if the user is authenticated
+    // if not redirects to login page
+    UserProfile.isAuthenticated();
 
     var App = function() {
         var that = this;

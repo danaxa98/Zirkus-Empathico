@@ -290,8 +290,11 @@ define('services/Levels', ['jsb', 'logging', 'data/Levels', 'services/Tasks', 's
             options = [];
         }
 
-        //Shuffle all alternative options and get two
-        options = _.shuffle(options).slice(0, 2);
+        //Shuffle all alternative options and at least on but max NumberOfChoicesForCurrentTask-1
+        var numberOfChoicesForAdaptiveTraining = localStorage.getNumberOfChoicesForCurrentTask() - 1;
+
+        options = _.shuffle(options).slice(0, numberOfChoicesForAdaptiveTraining > 1 ? numberOfChoicesForAdaptiveTraining : 1);
+
         //Add the right add answer
         options.push(task.emotion);
         //shuffle again
@@ -301,7 +304,7 @@ define('services/Levels', ['jsb', 'logging', 'data/Levels', 'services/Tasks', 's
     };
 
     Levels.prototype.shuffleOptions = function(task, options) {
-        if (options.length < 3) {
+        if (options.length < 2) {
             return;
         }
         options = _.shuffle(options);

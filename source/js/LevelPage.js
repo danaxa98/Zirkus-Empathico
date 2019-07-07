@@ -4,14 +4,18 @@ define('LevelPage',
         'task-page/mg2/Controller',
         'task-page/mg3/Controller',
         'task-page/mg4/Controller',
-        'task-page/mg5/Controller'],
+        'task-page/mg5/Controller',
+        'AdaptiveSystem',
+        'services/UserProfile'],
     function(jsb, logging, $, _, BasePage, levels,
              localStorage,
              mg1Controller,
              mg2Controller,
              mg3Controller,
              mg4Controller,
-             mg5Controller
+             mg5Controller,
+             AdaptiveSystem,
+             userProfile
         )
 {
     "use strict";
@@ -104,6 +108,15 @@ define('LevelPage',
         this.domElement.find('.third-option').on('click', function() {
             that.chooseFace(3, $(this));
         });
+        this.domElement.find('.fourth-option').on('click', function() {
+            that.chooseFace(4, $(this));
+        });
+        this.domElement.find('.fifth-option').on('click', function() {
+            that.chooseFace(5, $(this));
+        });
+        this.domElement.find('.sixth-option').on('click', function() {
+            that.chooseFace(6, $(this));
+        });                        
 
         this.domElement.find('.correct-option').on('click', function() {
             that.chooseCorrectFace();
@@ -162,7 +175,7 @@ define('LevelPage',
 
             var emotion = that.level.options[facePosition - 1];
 
-            var aryOption = ['.first-option', '.second-option', '.third-option'];
+            var aryOption = ['.first-option', '.second-option', '.third-option', '.fourth-option', '.fifth-option', '.sixth-option'];
             that.domElement.find(aryOption[facePosition - 1]).addClass(
                 (emotion == that.level.correct) ? 'is-correct' : 'is-incorrect');
 
@@ -212,6 +225,25 @@ define('LevelPage',
      */
     LevelPage.prototype.finish = function(successfully) {
         var that = this;
+
+        if (that.level.miniGameId == 2){
+
+            clearTimeout(localStorage.getCurrentTimerID() );
+
+            if ( localStorage.isCurrentTimeConstraintAchieved() === false )
+                successfully = false;
+
+            var eScoreChange = AdaptiveSystem.updateScores( userProfile.getGamesPlayed(), localStorage.getExpectedSuccessRate() , successfully ? 1 : 0, localStorage.getNumberOfChoicesForCurrentTask() );
+
+            userProfile.incrementGamesPlayed();
+
+            localStorage.setCurrentScoreChange(eScoreChange);
+            localStorage.setCurrentScoreChange(eScoreChange);
+
+            userProfile.updateUserEmotionScore(localStorage.getLastEmotionPlayed(), eScoreChange);
+            
+        }
+
         localStorage.setLastPlayedLevel(that.level.miniGameId, that.level.id);
         if (successfully) {
             jsb.fireEvent('Tracking::ACTIVITY', {

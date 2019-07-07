@@ -187,6 +187,12 @@ module.exports = function(grunt) {
 		
 		// Configuration for copying files
 		copy: {
+			userprofile:{
+				cwd: 'source/user-profile',
+				dest: 'dist/user-profile',
+				expand: true,
+				src: ['**/*']
+			},
 			ajax: {
 				cwd: 'source/ajax-content/',
 				dest: 'dist/ajax-content/',
@@ -925,8 +931,8 @@ module.exports = function(grunt) {
 	// Distributing task
 	grunt.registerTask('dist', [
 		'clean:dist',
-        'generate:persons',
-        'generate:context',
+		'generate:persons',
+		'generate:context',
 		'clean:docs',
 		'svgmin',
 		'svgcss',
@@ -935,20 +941,21 @@ module.exports = function(grunt) {
 		'autoprefixer:dist',
 		'group_css_media_queries',
 		'cssmin',
-        'copy:svg_images',
+		'copy:svg_images',
 		'copy:ajax',
-        'copy:media',
-        'copy:bower_components',
+		'copy:userprofile',
+		'copy:media',
+		'copy:bower_components',
 		'copy:favicon',
 		'copy:fonts',
 		'copy:js',
 		'uglify',
 		'clean:dist_js',
 		'prettify:dist',
-//		'htmlhint',
-//		'accessibility',
+		// 'htmlhint',
+		// 'accessibility',
 		'jshint'
-//		'jsdoc'
+		// 'jsdoc'
 	]);
 
     grunt.registerTask('cordova:build', [
