@@ -471,7 +471,7 @@
      function SendMail($Email,$Guid){
 
          
-          $from = "studie@zirkus-empathico.de";
+          $from = "no-reply@zirkus-empathico.de";
     $to = $Email;
     //$subject = "Anfrage zum Passwort Zurücksetzen";
     $subject = "Password Reset Request";
@@ -486,7 +486,7 @@
      
      $message = '<html><body>';
 $message .= '<h4 style="color:#f40;">Bitte klicke auf den Link um dein Passwort zurückzusetzen!</h4>';
-$message .= '<a href="https://dev.zirkus-empathico.de/user-profile/PasswordReset.php?Guid='.$Guid.'">Passwort zurücksetzen</a></p>';
+$message .= '<a href="https://trainingv2.zirkus-empathico.de/user-profile/PasswordReset.php?Guid='.$Guid.'">Passwort zurücksetzen</a></p>';
 $message .= '</body></html>';
     mail($to,$subject,$message, $headers);
     
