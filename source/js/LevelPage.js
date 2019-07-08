@@ -291,12 +291,14 @@ define('LevelPage',
 
         localStorage.setTaskFinishedForMiniGameLevelAndTaskId(that.level.miniGameId, that.level.id, that.level.taskId);
         localStorage.setStatusWonWithAward();
+        userProfile.saveLocalStorage();
         document.location = 'main.html#choose-level/' + that.level.miniGameId + '';
     };
 
     LevelPage.prototype.finishWithoutAward = function() {
         var that = this;
         localStorage.setStatusWonWithoutAward();
+        userProfile.saveLocalStorage();
         document.location = 'main.html#choose-level/' + that.level.miniGameId;
     };
 
