@@ -44,7 +44,7 @@
     "handlebars-helper-partial": "*",
     "handlebars-helpers": "~0.5.5",
     "jit-grunt": "~0.8.0",
-    "jquery": "^2.1.4",
+    "jquery": "^3.4.1",
     "localStorage": "^1.0.3",
     "mocha": "^2.3.0",
     "requirejs": "^2.1.20",
